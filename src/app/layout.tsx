@@ -2,6 +2,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { type ReactNode, Suspense } from 'react';
 
 import Analytics from '@/components/Analytics';
+import '@/styles/pictura-overrides.css';
 
 const inVercel = process.env.VERCEL === '1';
 
