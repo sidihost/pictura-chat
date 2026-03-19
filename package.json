@@ -309,6 +309,8 @@
     "discord-api-types": "^0.38.40",
     "drizzle-orm": "^0.45.1",
     "drizzle-zod": "^0.5.1",
+    "e2b": "^1.0.5",
+    "@e2b/code-interpreter": "^1.0.4",
     "epub2": "^3.0.2",
     "es-toolkit": "^1.44.0",
     "fast-deep-equal": "^3.1.3",
