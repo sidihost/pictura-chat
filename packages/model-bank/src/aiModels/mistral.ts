@@ -118,8 +118,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Mistral Small is a cost-effective, fast, and reliable option for translation, summarization, and sentiment analysis.',
-    displayName: 'Mistral Small 3.2',
+      'Pictura 3.0 is a cost-effective, fast, and reliable option for translation, summarization, and sentiment analysis.',
+    displayName: 'Pictura 3.0',
     id: 'mistral-small-latest',
     pricing: {
       units: [
@@ -136,8 +136,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Mistral Large is the flagship model, strong in multilingual tasks, complex reasoning, and code generation—ideal for high-end applications.',
-    displayName: 'Mistral Large 2.1',
+      'Pictura 3.5 is a flagship model, strong in multilingual tasks, complex reasoning, and code generation—ideal for high-end applications.',
+    displayName: 'Pictura 3.5',
     id: 'mistral-large-latest',
     pricing: {
       units: [
@@ -172,8 +172,9 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Pixtral Large is a 124B-parameter open multimodal model built on Mistral Large 2, the second in our multimodal family with frontier-level image understanding.',
-    displayName: 'Pixtral Large',
+      'Pictura 4.5 is our flagship multimodal model with frontier-level image understanding and document processing capabilities.',
+    displayName: 'Pictura 4.5',
+    enabled: true,
     id: 'pixtral-large-latest',
     pricing: {
       units: [
@@ -190,8 +191,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Pixtral is strong at chart/image understanding, document QA, multimodal reasoning, and instruction following. It ingests images at native resolution/aspect ratio and handles any number of images within a 128K context window.',
-    displayName: 'Pixtral 12B',
+      'Pictura 4.0 is optimized for chart/image understanding, document QA, multimodal reasoning, and instruction following with a 128K context window.',
+    displayName: 'Pictura 4.0',
     id: 'pixtral-12b-2409',
     pricing: {
       units: [

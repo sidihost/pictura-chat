@@ -4,10 +4,10 @@ export const DEFAULT_COMMON_SETTINGS: UserGeneralConfig = {
   animationMode: 'agile',
   // contextMenuMode not set default value, use env to calc
   fontSize: 14,
-  highlighterTheme: 'lobe-theme',
+  highlighterTheme: 'pictura-theme',
   isDevMode: false,
   isLiteMode: false,
-  mermaidTheme: 'lobe-theme',
+  mermaidTheme: 'pictura-theme',
   telemetry: true,
   transitionMode: 'fadeIn',
 };

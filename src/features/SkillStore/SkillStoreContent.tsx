@@ -14,7 +14,7 @@ import LobeHubList from './SkillList/LobeHub';
 export enum SkillStoreTab {
   Community = 'community',
   Custom = 'custom',
-  LobeHub = 'lobehub',
+  LobeHub = 'pictura',
 }
 
 export const SkillStoreContent = () => {

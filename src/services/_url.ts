@@ -26,6 +26,7 @@ export const API_ENDPOINTS = {
   tts: (provider: string) => withElectronProtocolIfElectron(`/webapi/tts/${provider}`),
   edge: withElectronProtocolIfElectron('/webapi/tts/edge'),
   microsoft: withElectronProtocolIfElectron('/webapi/tts/microsoft'),
+  elevenlabs: withElectronProtocolIfElectron('/webapi/tts/elevenlabs'),
 };
 
 export const MARKET_OIDC_ENDPOINTS = {
