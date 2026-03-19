@@ -4,17 +4,26 @@
    PRIMARY BUTTONS - White text and icons
    ============================================ */
 
-/* Send button - white icon on orange background */
+/* Send button - FORCE white icon on orange background */
 [class*="SendButton"] svg,
+[class*="SendButton"] svg *,
 [class*="SendButton"] path,
 button[class*="send"] svg,
-button[class*="send"] path,
+button[class*="send"] svg *,
 .lobe-send-button svg,
 [class*="lobe-send"] svg,
-[data-testid*="send"] svg {
+[data-testid*="send"] svg,
+[class*="SendButton"] .anticon,
+[class*="SendButton"] .anticon svg {
   color: white !important;
   fill: white !important;
   stroke: white !important;
+}
+
+/* Send button container - ensure white content */
+[class*="SendButton"],
+[class*="SendButton"] * {
+  --lobe-icon-color: white !important;
 }
 
 /* Send button text should be white */
@@ -62,31 +71,41 @@ button[style*="c87941"] svg,
 }
 
 /* ============================================
-   MENU/LIST ITEMS - Brand color icons
+   PROFILE/SETTINGS MENU - Darker background for icons
    ============================================ */
 
-/* Menu items - use Pictura brand color */
+/* Profile section icons - use darker shade with brand color */
+[class*="UserPanel"] svg,
+[class*="userPanel"] svg,
+[class*="Profile"] svg,
+[class*="profile"] svg,
+[class*="Account"] svg,
+[class*="Settings"] svg,
 .ant-menu-item .anticon,
 .ant-menu-item svg,
 [class*="MenuItem"] svg,
 [class*="menu-item"] svg,
 [class*="MenuList"] svg {
-  color: #C87941 !important;
+  color: #8B5A2B !important; /* Darker brown shade for better visibility */
   opacity: 1 !important;
 }
 
+/* Icons in list items - make them stand out */
+[class*="List"] [class*="Item"] svg,
+[class*="list"] [class*="item"] svg,
+[class*="ListItem"] svg {
+  color: #8B5A2B !important; /* Darker shade */
+  opacity: 1 !important;
+}
+
+/* Hover state - use brand color */
 .ant-menu-item:hover .anticon,
 .ant-menu-item:hover svg,
 [class*="MenuItem"]:hover svg,
-[class*="menu-item"]:hover svg {
-  color: #a5612e !important; /* Darker shade on hover */
-}
-
-/* Settings/Profile list items - brand color */
-[class*="List"] [class*="Item"] svg,
-[class*="list"] [class*="item"] svg {
-  color: #C87941 !important;
-  opacity: 1 !important;
+[class*="menu-item"]:hover svg,
+[class*="ListItem"]:hover svg,
+[class*="List"] [class*="Item"]:hover svg {
+  color: #C87941 !important; /* Brand color on hover */
 }
 
 /* ============================================
@@ -111,15 +130,38 @@ a:hover {
    CHAT INPUT - Action bar icons
    ============================================ */
 
-/* Action bar icons use brand color */
+/* Action bar icons use darker shade */
 [class*="ActionBar"] svg,
 [class*="actionBar"] svg {
-  color: #C87941 !important;
+  color: #8B5A2B !important;
   opacity: 1;
 }
 
 [class*="ActionBar"]:hover svg,
 [class*="actionBar"]:hover svg {
   opacity: 1;
-  color: #a5612e !important; /* Darker shade on hover */
+  color: #C87941 !important; /* Brand color on hover */
+}
+
+/* ============================================
+   FORCE SEND BUTTON WHITE ICONS - Extra specificity
+   ============================================ */
+
+/* Target the send button specifically with high specificity */
+button[class*="css"][style*="background"] svg,
+button[class*="css"][style*="background"] svg path,
+div[class*="SendButton"] svg,
+div[class*="SendButton"] svg path,
+span[class*="SendButton"] svg,
+span[class*="SendButton"] svg path {
+  color: white !important;
+  fill: white !important;
+  stroke: white !important;
+}
+
+/* Any button with primary color that has an SVG */
+[style*="--lobe-color-primary"] svg,
+[style*="rgb(200"] svg {
+  color: white !important;
+  fill: white !important;
 }

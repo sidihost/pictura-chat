@@ -77,8 +77,8 @@ export const DEFAULT_FEATURE_FLAGS: IFeatureFlags = {
 
   cloud_promotion: false,
 
-  // Pictura AI - disable external LobeHub market (self-hosted)
-  market: false,
+  // Pictura AI - enable marketplace for agents and plugins
+  market: true,
   speech_to_text: true,
   changelog: false,
 

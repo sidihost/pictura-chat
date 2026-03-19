@@ -160,7 +160,7 @@ const ChatAppearance = memo(() => {
             <Select
               value={general.highlighterTheme}
               options={highlighterThemes.map((item) => ({
-                label: item.displayName,
+                label: item.id === 'lobe-theme' ? 'Pictura Theme' : item.displayName,
                 value: item.id,
               }))}
               style={{
