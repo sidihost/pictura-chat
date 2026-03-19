@@ -4,7 +4,7 @@ import qs from 'query-string';
 import { getCanonicalUrl } from '@/server/utils/url';
 
 const MAX_AGE = 31_536_000;
-const COLOR = '#000000';
+const COLOR = '#C87941'; // Pictura AI brand color
 
 interface IconItem {
   purpose: 'any' | 'maskable';
