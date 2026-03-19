@@ -8,8 +8,8 @@ import { generateTrustedClientToken, getTrustedClientTokenForSession } from '@/l
 
 const log = debug('lobe-server:market-service');
 
-// Use LobeHub market for agents and plugins
-const MARKET_BASE_URL = process.env.MARKET_BASE_URL || 'https://market.lobehub.com';
+// Use Pictura AI market for agents and plugins
+const MARKET_BASE_URL = process.env.MARKET_BASE_URL || 'https://agents.picturaai.sbs';
 const IS_MARKET_ENABLED = !!MARKET_BASE_URL;
 
 // ============================== Helper Functions ==============================

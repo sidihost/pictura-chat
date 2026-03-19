@@ -64,8 +64,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Magistral Medium 1.2 is a frontier reasoning model from Mistral AI (Sep 2025) with vision support.',
-    displayName: 'Magistral Medium 1.2',
+      'Pictura 4.5 Pro is a frontier reasoning model with vision support for complex tasks.',
+    displayName: 'Pictura 4.5 Pro',
     enabled: true,
     id: 'magistral-medium-latest',
     pricing: {
@@ -83,8 +83,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Magistral Small 1.2 is an open-source small reasoning model from Mistral AI (Sep 2025) with vision support.',
-    displayName: 'Magistral Small 1.2',
+      'Pictura 4.5 Lite is an efficient reasoning model with vision support.',
+    displayName: 'Pictura 4.5 Lite',
     id: 'magistral-small-2509',
     pricing: {
       units: [

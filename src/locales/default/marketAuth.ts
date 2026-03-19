@@ -1,14 +1,14 @@
 export default {
   'authorize.cancel': 'Not Now',
-  'authorize.confirm': 'Create Your Profile',
-  'authorize.description': 'Your community profile is separate from your {{appName}} user account.',
+  'authorize.confirm': 'Connect Account',
+  'authorize.description': 'Connect to access Pictura AI agents and plugins.',
   'authorize.footer.agreement':
     'By continuing, you confirm that you have read and agree to the <terms>Terms and Conditions</terms> and <privacy>Privacy Policy</privacy>.',
   'authorize.footer.privacy': 'Privacy Policy',
   'authorize.footer.terms': 'Terms of Service',
   'authorize.subtitle':
-    'Create a community profile to submit and manage listings within the community.',
-  'authorize.title': 'Create Community Profile',
+    'Connect your account to browse and use agents and plugins from the Pictura marketplace.',
+  'authorize.title': 'Connect to Pictura Marketplace',
   'callback.buttons.close': 'Close Window',
   'callback.messages.authFailed': 'Authorization failed: {{error}}',
   'callback.messages.missingParams': 'Missing authorization parameters',

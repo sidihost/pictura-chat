@@ -1,139 +1,153 @@
 /* Pictura AI Style Overrides */
 
 /* ============================================
-   SEND BUTTON - White icon (HIGHEST PRIORITY)
+   CRITICAL: WHITE TEXT/ICONS ON ALL BUTTONS
+   Force white color on ALL buttons that have brand/primary background
    ============================================ */
 
-/* Force all send button icons to white */
-[class*="SendButton"] svg,
-[class*="SendButton"] svg *,
-[class*="SendButton"] path,
-[class*="send"] svg,
-[class*="Send"] svg,
-button[class*="send"] svg,
-button[class*="Send"] svg,
-[data-testid*="send"] svg {
-  color: white !important;
-  fill: white !important;
-  stroke: white !important;
+/* ALL buttons with any kind of filled/primary styling */
+button,
+.ant-btn,
+[class*="Button"],
+[class*="button"] {
+  /* When background is orange/brand, text must be white */
 }
 
-/* ============================================
-   ALL PRIMARY/BRAND BUTTONS - White text & icons
-   ============================================ */
-
-/* Ant Design primary buttons */
+/* Ant Design Primary Buttons - FORCE WHITE */
 .ant-btn-primary,
 .ant-btn-primary:hover,
 .ant-btn-primary:focus,
-.ant-btn-primary:active {
-  color: white !important;
+.ant-btn-primary:active,
+.ant-btn-primary[disabled] {
+  color: #ffffff !important;
 }
 
+.ant-btn-primary *,
 .ant-btn-primary span,
 .ant-btn-primary svg,
-.ant-btn-primary .anticon {
-  color: white !important;
-}
-
-.ant-btn-primary svg,
-.ant-btn-primary svg *,
+.ant-btn-primary .anticon,
 .ant-btn-primary path {
-  fill: white !important;
-  stroke: white !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
-/* Any button with type submit */
+/* ============================================
+   SEND BUTTON - WHITE ICON (CRITICAL)
+   ============================================ */
+
+/* Target send button by any class naming convention */
+[class*="send" i] svg,
+[class*="send" i] svg *,
+[class*="send" i] path,
+[class*="SendButton"] svg,
+[class*="SendButton"] svg *,
+[class*="SendButton"] path,
+button[aria-label*="send" i] svg,
+button[aria-label*="Send"] svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Also target by position - typically the rightmost button in chat input */
+[class*="ChatInput"] button:last-child svg,
+[class*="chatInput"] button:last-child svg,
+[class*="InputArea"] button:last-child svg,
+[class*="inputArea"] button:last-child svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* ============================================
+   ONBOARDING PAGE BUTTONS - WHITE TEXT
+   ============================================ */
+
+/* Target onboarding pages specifically */
+[class*="onboarding" i] button,
+[class*="onboarding" i] button span,
+[class*="onboarding" i] button svg,
+[class*="onboarding" i] .ant-btn,
+[class*="onboarding" i] .ant-btn span,
+[class*="onboarding" i] .ant-btn svg {
+  color: #ffffff !important;
+}
+
+[class*="onboarding" i] button svg,
+[class*="onboarding" i] button path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* ============================================
+   TYPE=SUBMIT BUTTONS - WHITE TEXT
+   ============================================ */
+
 button[type="submit"],
 button[type="submit"] span,
-button[type="submit"] svg {
-  color: white !important;
-}
-
 button[type="submit"] svg,
-button[type="submit"] path {
-  fill: white !important;
+button[type="submit"] path,
+input[type="submit"] {
+  color: #ffffff !important;
+  fill: #ffffff !important;
 }
 
-/* Buttons with inline brand color styles */
+/* ============================================
+   INLINE STYLE BRAND COLOR BUTTONS
+   ============================================ */
+
+/* Any button with inline background color styles */
 button[style*="background"],
 button[style*="C87941"],
 button[style*="c87941"],
-button[style*="rgb(200, 121, 65)"] {
-  color: white !important;
+button[style*="rgb(200"],
+[style*="background"][style*="C87941"],
+[style*="background"][style*="c87941"] {
+  color: #ffffff !important;
 }
 
 button[style*="background"] span,
-button[style*="C87941"] span,
-button[style*="c87941"] span,
-button[style*="rgb(200, 121, 65)"] span {
-  color: white !important;
-}
-
 button[style*="background"] svg,
+button[style*="background"] path,
+button[style*="C87941"] span,
 button[style*="C87941"] svg,
-button[style*="c87941"] svg,
-button[style*="rgb(200, 121, 65)"] svg {
-  color: white !important;
-  fill: white !important;
+button[style*="c87941"] span,
+button[style*="c87941"] svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 /* ============================================
-   ONBOARDING BUTTONS - White text
+   LOBEHUB UI ACTION ICONS
    ============================================ */
 
-/* Onboarding page buttons */
-[class*="onboarding"] button[class*="primary"],
-[class*="onboarding"] .ant-btn-primary,
-[class*="Onboarding"] button,
-[class*="onboarding"] button {
-  color: white !important;
-}
-
-[class*="onboarding"] button span,
-[class*="Onboarding"] button span {
-  color: white !important;
-}
-
-/* ============================================
-   LOBEHUB UI COMPONENTS - White on primary
-   ============================================ */
-
-/* ActionIcon with fill variant */
+/* ActionIcon with fill variant should have white icon */
 [class*="ActionIcon"][class*="fill"] svg,
-[class*="actionIcon"][class*="fill"] svg,
 [class*="ActionIcon"][class*="primary"] svg,
-[class*="actionIcon"][class*="primary"] svg {
-  color: white !important;
-  fill: white !important;
-}
-
-/* Any component with primary color variable */
-[style*="--lobe-color-primary"] button span,
-[style*="--lobe-color-primary"] button svg {
-  color: white !important;
+[class*="actionicon" i][class*="fill" i] svg,
+[class*="actionicon" i][class*="primary" i] svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
 }
 
 /* ============================================
-   PROFILE/SETTINGS MENU - Better icon visibility
+   PROFILE/MENU ICONS - DARK FOR VISIBILITY
    ============================================ */
 
-/* Use darker shade for menu icons */
-[class*="UserPanel"] svg,
-[class*="userPanel"] svg,
-[class*="Profile"] svg,
-[class*="profile"] svg,
-[class*="Account"] svg,
-[class*="Settings"] svg,
+/* Use darker shade for menu icons - NOT white */
 .ant-menu-item .anticon,
 .ant-menu-item svg,
 [class*="MenuItem"] svg,
 [class*="menu-item"] svg,
 [class*="MenuList"] svg,
-[class*="List"] [class*="Item"] svg,
-[class*="list"] [class*="item"] svg,
-[class*="ListItem"] svg {
-  color: #8B5A2B !important;
+[class*="UserPanel"] svg,
+[class*="Profile"]:not([class*="Button"]) svg,
+[class*="Account"]:not([class*="Button"]) svg,
+[class*="Settings"]:not([class*="Button"]) svg,
+[class*="ListItem"]:not([class*="Button"]) svg,
+[class*="List"] [class*="Item"]:not([class*="Button"]) svg {
+  color: #654321 !important;
   opacity: 1 !important;
 }
 
@@ -141,29 +155,17 @@ button[style*="rgb(200, 121, 65)"] svg {
 .ant-menu-item:hover .anticon,
 .ant-menu-item:hover svg,
 [class*="MenuItem"]:hover svg,
-[class*="menu-item"]:hover svg,
-[class*="ListItem"]:hover svg,
-[class*="List"] [class*="Item"]:hover svg {
+[class*="ListItem"]:hover svg {
   color: #C87941 !important;
 }
 
 /* ============================================
-   SKILL/TOOL LIST - Icon visibility
+   CHAT INPUT ACTION BAR ICONS
    ============================================ */
 
-[class*="SkillList"] img,
-[class*="skill"] img,
-[class*="Tool"] img {
-  opacity: 1 !important;
-}
-
-/* ============================================
-   CHAT INPUT ACTION BAR
-   ============================================ */
-
-[class*="ActionBar"] svg,
-[class*="actionBar"] svg {
-  color: #8B5A2B !important;
+[class*="ActionBar"]:not([class*="Button"]) svg,
+[class*="actionBar"]:not([class*="Button"]) svg {
+  color: #654321 !important;
   opacity: 1;
 }
 
@@ -173,7 +175,7 @@ button[style*="rgb(200, 121, 65)"] svg {
 }
 
 /* ============================================
-   LINKS - Brand color on hover
+   LINKS - Brand color
    ============================================ */
 
 a:hover {
@@ -181,23 +183,48 @@ a:hover {
 }
 
 /* ============================================
-   GLOBAL OVERRIDE FOR ANY ORANGE BACKGROUND
+   MODAL/DIALOG CONFIRM BUTTONS
    ============================================ */
 
-/* Ensure any element with orange/brand background has white content */
+.ant-modal-confirm-btns .ant-btn-primary,
+.ant-modal-confirm-btns .ant-btn-primary span,
+[class*="Modal"] .ant-btn-primary,
+[class*="Modal"] .ant-btn-primary span,
+[class*="Dialog"] button[class*="primary"],
+[class*="Dialog"] button[class*="primary"] span {
+  color: #ffffff !important;
+}
+
+/* ============================================
+   FORM SUBMIT BUTTONS
+   ============================================ */
+
+form button[type="submit"],
+form button[type="submit"] span,
+form .ant-btn-primary,
+form .ant-btn-primary span,
+[class*="Form"] button[type="submit"],
+[class*="Form"] button[type="submit"] span {
+  color: #ffffff !important;
+}
+
+/* ============================================
+   CATCH-ALL: ANY ELEMENT WITH BRAND BG
+   ============================================ */
+
 [style*="background-color: #C87941"] *,
 [style*="background-color:#C87941"] *,
 [style*="background: #C87941"] *,
 [style*="background:#C87941"] *,
-[style*="background-color: rgb(200, 121, 65)"] * {
-  color: white !important;
+[style*="background-color: rgb(200, 121, 65)"] *,
+[style*="background: rgb(200, 121, 65)"] * {
+  color: #ffffff !important;
 }
 
-[style*="background-color: #C87941"] svg,
-[style*="background-color:#C87941"] svg,
-[style*="background: #C87941"] svg,
-[style*="background:#C87941"] svg,
-[style*="background-color: rgb(200, 121, 65)"] svg {
-  color: white !important;
-  fill: white !important;
+[style*="C87941"] svg,
+[style*="c87941"] svg,
+[style*="rgb(200, 121, 65)"] svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
