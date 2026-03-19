@@ -1,6 +1,7 @@
 /**
  * Email verification template
  * Sent to users when they sign up to verify their email address
+ * Colors: Primary #C87941, White #FAF8F5
  */
 export const getVerificationEmailTemplate = (params: {
   expiresInSeconds: number;
@@ -33,23 +34,8 @@ export const getVerificationEmailTemplate = (params: {
     <div style="text-align: center; margin-bottom: 32px;">
       <div style="display: inline-flex; align-items: center; justify-content: center; background-color: #ffffff; border-radius: 12px; padding: 8px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
         <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
-          <rect width="64" height="64" rx="16" fill="url(#pictura-bg-email)"/>
-          <path d="M22 46V18h10c3.5 0 6.3 1.2 8.4 3.5 2.1 2.3 3.1 5.2 3.1 8.5s-1 6.2-3.1 8.5C38.3 40.8 35.5 42 32 42h-4" stroke="url(#pictura-stroke-email)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <circle cx="44" cy="20" r="3" fill="url(#pictura-accent-email)"/>
-          <defs>
-            <linearGradient id="pictura-bg-email" x1="0" y1="0" x2="64" y2="64">
-              <stop stop-color="#C87941"/>
-              <stop offset="1" stop-color="#A0522D"/>
-            </linearGradient>
-            <linearGradient id="pictura-stroke-email" x1="22" y1="18" x2="44" y2="46">
-              <stop stop-color="#FFFFFF"/>
-              <stop offset="1" stop-color="#F5E6D3"/>
-            </linearGradient>
-            <linearGradient id="pictura-accent-email" x1="41" y1="17" x2="47" y2="23">
-              <stop stop-color="#FFD700"/>
-              <stop offset="1" stop-color="#FFA500"/>
-            </linearGradient>
-          </defs>
+          <rect width="64" height="64" rx="16" fill="#C87941"/>
+          <path d="M22 46V18h10c3.5 0 6.3 1.2 8.4 3.5 2.1 2.3 3.1 5.2 3.1 8.5s-1 6.2-3.1 8.5C38.3 40.8 35.5 42 32 42h-4" stroke="#FAF8F5" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         </svg>
         <span style="font-size: 18px; font-weight: 700; color: #C87941; letter-spacing: -0.5px;">Pictura AI</span>
       </div>
@@ -79,7 +65,7 @@ export const getVerificationEmailTemplate = (params: {
         <!-- Button -->
         <div style="text-align: center; margin: 36px 0;">
           <a href="${url}" target="_blank"
-             style="display: inline-block; background-color: #C87941; color: #FAF8F5; text-decoration: none; padding: 16px 36px; border-radius: 14px; font-weight: 600; font-size: 16px; transition: transform 0.1s ease; box-shadow: 0 4px 12px rgba(200,121,65,0.3);">
+             style="display: inline-block; background-color: #C87941; color: #FAF8F5; text-decoration: none; padding: 16px 36px; border-radius: 14px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 12px rgba(200,121,65,0.3);">
             Verify Email Address
           </a>
         </div>
