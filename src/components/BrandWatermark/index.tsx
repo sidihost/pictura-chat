@@ -33,7 +33,7 @@ const BrandWatermark = memo<Omit<FlexboxProps, 'children'>>(({ style, ...rest })
     >
       <span>Powered by</span>
       {isCustomORG ? (
-        <span>{ORG_NAME}</span>
+        <span style={{ color: '#C87941', fontWeight: 600 }}>{ORG_NAME}</span>
       ) : (
         <a
           className={styles.logoLink}

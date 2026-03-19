@@ -21,16 +21,12 @@ const ThemeSwatchesPrimary = memo<IProps>(({ onChange, value }) => {
       value={value ? primaryColors[value] : undefined}
       colors={[
         {
-          color: 'rgba(0, 0, 0, 0)',
+          color: primaryColors.orange,
           title: t('default'),
         },
         {
           color: primaryColors.red,
           title: t('red'),
-        },
-        {
-          color: primaryColors.orange,
-          title: t('orange'),
         },
         {
           color: primaryColors.gold,

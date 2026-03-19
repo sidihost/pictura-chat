@@ -94,7 +94,7 @@ export interface AppThemeProps {
 const AppTheme = memo<AppThemeProps>(
   ({
     children,
-    defaultPrimaryColor,
+    defaultPrimaryColor = 'orange', // Pictura brand color
     defaultNeutralColor,
     globalCDN,
     customFontURL,

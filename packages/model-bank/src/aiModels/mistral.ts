@@ -118,8 +118,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Pictura 3.0 is a cost-effective, fast, and reliable option for translation, summarization, and sentiment analysis.',
-    displayName: 'Pictura 3.0',
+      'Pictura 5.0 Lite is a cost-effective, fast, and reliable option for translation, summarization, and sentiment analysis.',
+    displayName: 'Pictura 5.0 Lite',
     id: 'mistral-small-latest',
     pricing: {
       units: [
@@ -136,8 +136,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Pictura 3.5 is a flagship model, strong in multilingual tasks, complex reasoning, and code generation—ideal for high-end applications.',
-    displayName: 'Pictura 3.5',
+      'Pictura 5.0 Pro is a flagship model, strong in multilingual tasks, complex reasoning, and code generation—ideal for high-end applications.',
+    displayName: 'Pictura 5.0 Pro',
     id: 'mistral-large-latest',
     pricing: {
       units: [
@@ -172,8 +172,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Pictura 4.5 is our flagship multimodal model with frontier-level image understanding and document processing capabilities.',
-    displayName: 'Pictura 4.5',
+      'Pictura 5.0 Vision is our flagship multimodal model with frontier-level image understanding and document processing capabilities.',
+    displayName: 'Pictura 5.0 Vision',
     enabled: true,
     id: 'pixtral-large-latest',
     pricing: {
@@ -191,8 +191,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Pictura 4.0 is optimized for chart/image understanding, document QA, multimodal reasoning, and instruction following with a 128K context window.',
-    displayName: 'Pictura 4.0',
+      'Pictura 5.0 Mini is optimized for chart/image understanding, document QA, multimodal reasoning, and instruction following with a 128K context window.',
+    displayName: 'Pictura 5.0 Mini',
     id: 'pixtral-12b-2409',
     pricing: {
       units: [

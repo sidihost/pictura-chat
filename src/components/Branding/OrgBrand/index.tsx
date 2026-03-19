@@ -7,7 +7,7 @@ import { isCustomORG } from '@/const/version';
 
 export const OrgBrand = memo<LobeHubProps>((props) => {
   if (isCustomORG) {
-    return <span>{ORG_NAME}</span>;
+    return <span style={{ color: '#C87941', fontWeight: 'bold' }}>{ORG_NAME}</span>;
   }
 
   return <LobeHub {...props} />;
