@@ -4,5 +4,4 @@ export const LOBE_THEME_NEUTRAL_COLOR = 'PICTURA_THEME_NEUTRAL_COLOR';
 
 // Pictura AI brand colors
 export const PICTURA_PRIMARY_COLOR = '#C87941';
-export const PICTURA_ACCENT_COLOR = '#FFD700';
 export const PICTURA_TEXT_ON_PRIMARY = '#FAF8F5';
