@@ -1,35 +1,78 @@
 /* Pictura AI Style Overrides */
 
-/* Send button icon should be white on orange background */
+/* ============================================
+   PRIMARY BUTTONS - White text and icons
+   ============================================ */
+
+/* Send button - white icon on orange background */
 [class*="SendButton"] svg,
+[class*="SendButton"] path,
 button[class*="send"] svg,
+button[class*="send"] path,
 .lobe-send-button svg,
-[class*="lobe-send"] svg {
+[class*="lobe-send"] svg,
+[data-testid*="send"] svg {
   color: white !important;
   fill: white !important;
+  stroke: white !important;
 }
 
-/* Ensure button text is white */
+/* Send button text should be white */
 [class*="SendButton"] span,
+[class*="SendButton"] div,
 button[class*="send"] span {
   color: white !important;
 }
 
-/* Primary buttons should have white text/icons */
+/* All primary/colored buttons - white text and icons */
+.ant-btn-primary,
+.ant-btn-primary span,
 .ant-btn-primary svg,
 .ant-btn-primary .anticon,
-button[type="submit"] svg {
+button[type="submit"],
+button[type="submit"] span,
+button[type="submit"] svg,
+[class*="primary"] button svg,
+[class*="primary"] button span {
+  color: white !important;
+}
+
+.ant-btn-primary svg,
+.ant-btn-primary path,
+button[type="submit"] svg,
+button[type="submit"] path {
+  fill: white !important;
+  stroke: white !important;
+}
+
+/* Buttons with orange/brand color background */
+button[style*="background"] svg,
+button[style*="C87941"] svg,
+button[style*="c87941"] svg,
+[style*="background-color: rgb(200, 121, 65)"] svg,
+[style*="background-color:#C87941"] svg {
   color: white !important;
   fill: white !important;
 }
 
-/* Menu/Settings list items - improve icon visibility with stronger contrast */
+/* lobehub-ui ActionIcon with fill variant */
+[class*="ActionIcon"][class*="fill"] svg,
+[class*="actionIcon"][class*="fill"] svg {
+  color: white !important;
+}
+
+/* ============================================
+   MENU/LIST ITEMS - Better icon visibility
+   ============================================ */
+
+/* Menu items - stronger icon colors */
 .ant-menu-item .anticon,
 .ant-menu-item svg,
 [class*="MenuItem"] svg,
-[class*="menu-item"] svg {
-  color: #555 !important;
-  opacity: 0.85;
+[class*="menu-item"] svg,
+[class*="MenuList"] svg {
+  color: #444 !important;
+  opacity: 1 !important;
 }
 
 .ant-menu-item:hover .anticon,
@@ -37,16 +80,45 @@ button[type="submit"] svg {
 [class*="MenuItem"]:hover svg,
 [class*="menu-item"]:hover svg {
   color: #C87941 !important;
-  opacity: 1;
 }
 
-/* Skill/Tool list items - stronger icon colors */
-[class*="SkillList"] img,
-[class*="skill"] img {
+/* Settings/Profile list items */
+[class*="List"] [class*="Item"] svg,
+[class*="list"] [class*="item"] svg {
+  color: #444 !important;
   opacity: 1 !important;
 }
 
-/* Ensure Pictura brand color for accent elements */
+/* ============================================
+   SKILL/TOOL LIST - Icon visibility
+   ============================================ */
+
+[class*="SkillList"] img,
+[class*="skill"] img,
+[class*="Tool"] img {
+  opacity: 1 !important;
+}
+
+/* ============================================
+   LINKS - Pictura brand color on hover
+   ============================================ */
+
 a:hover {
+  color: #C87941 !important;
+}
+
+/* ============================================
+   CHAT INPUT - Action bar icons
+   ============================================ */
+
+/* Ensure the model selector and other action icons are visible */
+[class*="ActionBar"] svg,
+[class*="actionBar"] svg {
+  opacity: 0.8;
+}
+
+[class*="ActionBar"]:hover svg,
+[class*="actionBar"]:hover svg {
+  opacity: 1;
   color: #C87941 !important;
 }

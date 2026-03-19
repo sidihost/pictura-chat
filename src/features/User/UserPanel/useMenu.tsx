@@ -2,7 +2,7 @@ import { LOBE_CHAT_CLOUD, UTM_SOURCE } from '@lobechat/business-const';
 import { DOWNLOAD_URL, isDesktop } from '@lobechat/const';
 import { Flexbox, Hotkey, Icon, Tag } from '@lobehub/ui';
 import { type ItemType } from 'antd/es/menu/interface';
-import { BrainCircuit, Cloudy, Download, HardDriveDownload, LogOut, Settings2 } from 'lucide-react';
+import { BrainCircuit, Cloudy, Download, FileText, HardDriveDownload, LogOut, Settings2 } from 'lucide-react';
 import { type PropsWithChildren } from 'react';
 import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -91,7 +91,7 @@ export const useMenu = () => {
 
   const getDesktopApp: MenuProps['items'] = [
     {
-      icon: <Icon icon={Download} />,
+      icon: <Icon icon={FileText} />,
       key: 'api-docs',
       label: (
         <a href="https://picturaai.sbs/api-docs" rel="noopener noreferrer" target="_blank">
