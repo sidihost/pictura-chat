@@ -1,80 +1,124 @@
 /* Pictura AI Style Overrides */
 
 /* ============================================
-   PRIMARY BUTTONS - White text and icons
+   SEND BUTTON - White icon (HIGHEST PRIORITY)
    ============================================ */
 
-/* Send button - FORCE white icon on orange background */
+/* Force all send button icons to white */
 [class*="SendButton"] svg,
 [class*="SendButton"] svg *,
 [class*="SendButton"] path,
+[class*="send"] svg,
+[class*="Send"] svg,
 button[class*="send"] svg,
-button[class*="send"] svg *,
-.lobe-send-button svg,
-[class*="lobe-send"] svg,
-[data-testid*="send"] svg,
-[class*="SendButton"] .anticon,
-[class*="SendButton"] .anticon svg {
+button[class*="Send"] svg,
+[data-testid*="send"] svg {
   color: white !important;
   fill: white !important;
   stroke: white !important;
 }
 
-/* Send button container - ensure white content */
-[class*="SendButton"],
-[class*="SendButton"] * {
-  --lobe-icon-color: white !important;
-}
+/* ============================================
+   ALL PRIMARY/BRAND BUTTONS - White text & icons
+   ============================================ */
 
-/* Send button text should be white */
-[class*="SendButton"] span,
-[class*="SendButton"] div,
-button[class*="send"] span {
+/* Ant Design primary buttons */
+.ant-btn-primary,
+.ant-btn-primary:hover,
+.ant-btn-primary:focus,
+.ant-btn-primary:active {
   color: white !important;
 }
 
-/* All primary/colored buttons - white text and icons */
-.ant-btn-primary,
 .ant-btn-primary span,
 .ant-btn-primary svg,
-.ant-btn-primary .anticon,
-button[type="submit"],
-button[type="submit"] span,
-button[type="submit"] svg,
-[class*="primary"] button svg,
-[class*="primary"] button span {
+.ant-btn-primary .anticon {
   color: white !important;
 }
 
 .ant-btn-primary svg,
-.ant-btn-primary path,
+.ant-btn-primary svg *,
+.ant-btn-primary path {
+  fill: white !important;
+  stroke: white !important;
+}
+
+/* Any button with type submit */
+button[type="submit"],
+button[type="submit"] span,
+button[type="submit"] svg {
+  color: white !important;
+}
+
 button[type="submit"] svg,
 button[type="submit"] path {
   fill: white !important;
-  stroke: white !important;
 }
 
-/* Buttons with orange/brand color background */
+/* Buttons with inline brand color styles */
+button[style*="background"],
+button[style*="C87941"],
+button[style*="c87941"],
+button[style*="rgb(200, 121, 65)"] {
+  color: white !important;
+}
+
+button[style*="background"] span,
+button[style*="C87941"] span,
+button[style*="c87941"] span,
+button[style*="rgb(200, 121, 65)"] span {
+  color: white !important;
+}
+
 button[style*="background"] svg,
 button[style*="C87941"] svg,
 button[style*="c87941"] svg,
-[style*="background-color: rgb(200, 121, 65)"] svg,
-[style*="background-color:#C87941"] svg {
+button[style*="rgb(200, 121, 65)"] svg {
   color: white !important;
   fill: white !important;
 }
 
-/* lobehub-ui ActionIcon with fill variant */
-[class*="ActionIcon"][class*="fill"] svg,
-[class*="actionIcon"][class*="fill"] svg {
+/* ============================================
+   ONBOARDING BUTTONS - White text
+   ============================================ */
+
+/* Onboarding page buttons */
+[class*="onboarding"] button[class*="primary"],
+[class*="onboarding"] .ant-btn-primary,
+[class*="Onboarding"] button,
+[class*="onboarding"] button {
+  color: white !important;
+}
+
+[class*="onboarding"] button span,
+[class*="Onboarding"] button span {
   color: white !important;
 }
 
 /* ============================================
-   PROFILE/SETTINGS MENU - Darker background for icons
+   LOBEHUB UI COMPONENTS - White on primary
    ============================================ */
 
-/* Profile section icons - use darker shade with brand color */
+/* ActionIcon with fill variant */
+[class*="ActionIcon"][class*="fill"] svg,
+[class*="actionIcon"][class*="fill"] svg,
+[class*="ActionIcon"][class*="primary"] svg,
+[class*="actionIcon"][class*="primary"] svg {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Any component with primary color variable */
+[style*="--lobe-color-primary"] button span,
+[style*="--lobe-color-primary"] button svg {
+  color: white !important;
+}
+
+/* ============================================
+   PROFILE/SETTINGS MENU - Better icon visibility
+   ============================================ */
+
+/* Use darker shade for menu icons */
 [class*="UserPanel"] svg,
 [class*="userPanel"] svg,
 [class*="Profile"] svg,
@@ -85,27 +129,22 @@ button[style*="c87941"] svg,
 .ant-menu-item svg,
 [class*="MenuItem"] svg,
 [class*="menu-item"] svg,
-[class*="MenuList"] svg {
-  color: #8B5A2B !important; /* Darker brown shade for better visibility */
-  opacity: 1 !important;
-}
-
-/* Icons in list items - make them stand out */
+[class*="MenuList"] svg,
 [class*="List"] [class*="Item"] svg,
 [class*="list"] [class*="item"] svg,
 [class*="ListItem"] svg {
-  color: #8B5A2B !important; /* Darker shade */
+  color: #8B5A2B !important;
   opacity: 1 !important;
 }
 
-/* Hover state - use brand color */
+/* Hover state - brand color */
 .ant-menu-item:hover .anticon,
 .ant-menu-item:hover svg,
 [class*="MenuItem"]:hover svg,
 [class*="menu-item"]:hover svg,
 [class*="ListItem"]:hover svg,
 [class*="List"] [class*="Item"]:hover svg {
-  color: #C87941 !important; /* Brand color on hover */
+  color: #C87941 !important;
 }
 
 /* ============================================
@@ -119,18 +158,9 @@ button[style*="c87941"] svg,
 }
 
 /* ============================================
-   LINKS - Pictura brand color on hover
+   CHAT INPUT ACTION BAR
    ============================================ */
 
-a:hover {
-  color: #C87941 !important;
-}
-
-/* ============================================
-   CHAT INPUT - Action bar icons
-   ============================================ */
-
-/* Action bar icons use darker shade */
 [class*="ActionBar"] svg,
 [class*="actionBar"] svg {
   color: #8B5A2B !important;
@@ -139,29 +169,35 @@ a:hover {
 
 [class*="ActionBar"]:hover svg,
 [class*="actionBar"]:hover svg {
-  opacity: 1;
-  color: #C87941 !important; /* Brand color on hover */
+  color: #C87941 !important;
 }
 
 /* ============================================
-   FORCE SEND BUTTON WHITE ICONS - Extra specificity
+   LINKS - Brand color on hover
    ============================================ */
 
-/* Target the send button specifically with high specificity */
-button[class*="css"][style*="background"] svg,
-button[class*="css"][style*="background"] svg path,
-div[class*="SendButton"] svg,
-div[class*="SendButton"] svg path,
-span[class*="SendButton"] svg,
-span[class*="SendButton"] svg path {
-  color: white !important;
-  fill: white !important;
-  stroke: white !important;
+a:hover {
+  color: #C87941 !important;
 }
 
-/* Any button with primary color that has an SVG */
-[style*="--lobe-color-primary"] svg,
-[style*="rgb(200"] svg {
+/* ============================================
+   GLOBAL OVERRIDE FOR ANY ORANGE BACKGROUND
+   ============================================ */
+
+/* Ensure any element with orange/brand background has white content */
+[style*="background-color: #C87941"] *,
+[style*="background-color:#C87941"] *,
+[style*="background: #C87941"] *,
+[style*="background:#C87941"] *,
+[style*="background-color: rgb(200, 121, 65)"] * {
+  color: white !important;
+}
+
+[style*="background-color: #C87941"] svg,
+[style*="background-color:#C87941"] svg,
+[style*="background: #C87941"] svg,
+[style*="background:#C87941"] svg,
+[style*="background-color: rgb(200, 121, 65)"] svg {
   color: white !important;
   fill: white !important;
 }

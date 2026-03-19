@@ -4,9 +4,9 @@ import {
   Book,
   CircleUserRound,
   Cloudy,
-  Download,
   Feather,
   FileClockIcon,
+  FileText,
   Settings2,
 } from 'lucide-react';
 import { useMemo } from 'react';
@@ -56,10 +56,10 @@ export const useCategory = (onOpenChangelogModal: () => void) => {
 
   const getDesktopApp: CellProps[] = [
     {
-      icon: Download,
-      key: 'get-desktop-app',
-      label: t('getDesktopApp'),
-      onClick: () => window.open(downloadUrl, '__blank'),
+      icon: FileText,
+      key: 'api-docs',
+      label: 'API Docs',
+      onClick: () => window.open('https://picturaai.sbs/api-docs', '__blank'),
     },
     {
       type: 'divider',
