@@ -36,12 +36,13 @@ export class BuiltinToolsExecutor implements IToolExecutor {
     );
 
     // Route LobeHub Skills to MarketService
+    // Disabled for self-hosted Pictura AI - requires LobeHub marketplace connection
     if (source === 'lobehubSkill') {
-      return this.marketService.executeLobehubSkill({
-        args,
-        provider: identifier,
-        toolName: apiName,
-      });
+      return {
+        content: 'This skill requires LobeHub marketplace connection which is not available in self-hosted Pictura AI. Please use local skills instead.',
+        error: { code: 'LOBEHUB_SKILL_DISABLED', message: 'LobeHub skills are disabled in self-hosted mode' },
+        success: false,
+      };
     }
 
     // Route Klavis tools to KlavisService
