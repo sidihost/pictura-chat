@@ -10,6 +10,7 @@ const log = debug('lobe-server:market-service');
 
 // Pictura AI: Disable external market by default - only use if explicitly configured
 const MARKET_BASE_URL = process.env.MARKET_BASE_URL || '';
+const IS_MARKET_ENABLED = !!MARKET_BASE_URL;
 
 // ============================== Helper Functions ==============================
 
@@ -76,9 +77,19 @@ export interface MarketServiceOptions {
  * ```
  */
 export class MarketService {
-  market: MarketSDK;
+  market: MarketSDK | null;
+  private isEnabled: boolean;
 
   constructor(options: MarketServiceOptions = {}) {
+    this.isEnabled = IS_MARKET_ENABLED;
+    
+    // Skip SDK initialization if market is disabled (self-hosted Pictura AI mode)
+    if (!this.isEnabled) {
+      this.market = null;
+      log('MarketService disabled: no MARKET_BASE_URL configured (self-hosted mode)');
+      return;
+    }
+
     const { accessToken, userInfo, clientCredentials, trustedClientToken } = options;
 
     // Use provided trustedClientToken or generate from userInfo
@@ -561,10 +572,21 @@ export class MarketService {
   // ============================== Direct SDK Access ==============================
 
   /**
+   * Check if market service is enabled
+   */
+  isMarketEnabled(): boolean {
+    return this.isEnabled;
+  }
+
+  /**
    * Get MarketSDK instance for advanced usage
    * Use this when you need direct access to SDK methods not wrapped by this service
+   * @throws Error if market is not enabled
    */
   getSDK(): MarketSDK {
+    if (!this.market) {
+      throw new Error('Market service is not enabled. Set MARKET_BASE_URL to enable it.');
+    }
     return this.market;
   }
 }

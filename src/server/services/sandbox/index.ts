@@ -66,6 +66,19 @@ export class ServerSandboxService implements ISandboxService {
       return this.callToolWithE2B(toolName, params);
     }
 
+    // Check if market is enabled before trying to use it
+    if (!this.marketService.isMarketEnabled()) {
+      return {
+        error: {
+          message: 'Cloud Sandbox is not available. Please configure E2B_API_KEY for code execution in self-hosted mode.',
+          name: 'SANDBOX_NOT_CONFIGURED',
+        },
+        result: null,
+        sessionExpiredAndRecreated: false,
+        success: false,
+      };
+    }
+
     // Fall back to MarketService (requires LobeHub connection)
     try {
       const response = await this.marketService

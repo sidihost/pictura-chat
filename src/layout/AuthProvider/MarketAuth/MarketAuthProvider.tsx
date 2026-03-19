@@ -162,6 +162,12 @@ export const MarketAuthProvider = ({ children, isDesktop }: MarketAuthProviderPr
     if (typeof window !== 'undefined') {
       // Pictura AI: Disable external market by default
       const baseUrl = process.env.NEXT_PUBLIC_MARKET_BASE_URL || '';
+      
+      // Skip OIDC initialization if market is disabled (no base URL)
+      if (!baseUrl) {
+        return;
+      }
+      
       const desktopRedirectUri = new URL(MARKET_OIDC_ENDPOINTS.desktopCallback, baseUrl).toString();
 
       // Desktop uses Market's manually maintained Web callback; Web uses the current domain
