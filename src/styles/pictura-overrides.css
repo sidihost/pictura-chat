@@ -1,0 +1,52 @@
+/* Pictura AI Style Overrides */
+
+/* Send button icon should be white on orange background */
+[class*="SendButton"] svg,
+button[class*="send"] svg,
+.lobe-send-button svg,
+[class*="lobe-send"] svg {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Ensure button text is white */
+[class*="SendButton"] span,
+button[class*="send"] span {
+  color: white !important;
+}
+
+/* Primary buttons should have white text/icons */
+.ant-btn-primary svg,
+.ant-btn-primary .anticon,
+button[type="submit"] svg {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Menu/Settings list items - improve icon visibility with stronger contrast */
+.ant-menu-item .anticon,
+.ant-menu-item svg,
+[class*="MenuItem"] svg,
+[class*="menu-item"] svg {
+  color: #555 !important;
+  opacity: 0.85;
+}
+
+.ant-menu-item:hover .anticon,
+.ant-menu-item:hover svg,
+[class*="MenuItem"]:hover svg,
+[class*="menu-item"]:hover svg {
+  color: #C87941 !important;
+  opacity: 1;
+}
+
+/* Skill/Tool list items - stronger icon colors */
+[class*="SkillList"] img,
+[class*="skill"] img {
+  opacity: 1 !important;
+}
+
+/* Ensure Pictura brand color for accent elements */
+a:hover {
+  color: #C87941 !important;
+}

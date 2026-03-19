@@ -92,10 +92,10 @@ export const useMenu = () => {
   const getDesktopApp: MenuProps['items'] = [
     {
       icon: <Icon icon={Download} />,
-      key: 'get-desktop-app',
+      key: 'api-docs',
       label: (
-        <a href={downloadUrl} rel="noopener noreferrer" target="_blank">
-          {t('getDesktopApp')}
+        <a href="https://picturaai.sbs/api-docs" rel="noopener noreferrer" target="_blank">
+          API Docs
         </a>
       ),
     },
