@@ -45,8 +45,8 @@ const mistralChatModels: AIChatModelCard[] = [
     },
     contextWindowTokens: 131_072,
     description:
-      'Mistral Medium 3.1 delivers state-of-the-art performance at 8× lower cost and simplifies enterprise deployment.',
-    displayName: 'Mistral Medium 3.1',
+      'Pictura 4.0 delivers state-of-the-art performance at 8× lower cost and simplifies enterprise deployment.',
+    displayName: 'Pictura 4.0',
     enabled: true,
     id: 'mistral-medium-latest',
     pricing: {

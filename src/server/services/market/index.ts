@@ -8,8 +8,8 @@ import { generateTrustedClientToken, getTrustedClientTokenForSession } from '@/l
 
 const log = debug('lobe-server:market-service');
 
-// Pictura AI: Disable external market by default - only use if explicitly configured
-const MARKET_BASE_URL = process.env.MARKET_BASE_URL || '';
+// Use LobeHub market for agents and plugins
+const MARKET_BASE_URL = process.env.MARKET_BASE_URL || 'https://market.lobehub.com';
 const IS_MARKET_ENABLED = !!MARKET_BASE_URL;
 
 // ============================== Helper Functions ==============================

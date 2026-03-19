@@ -288,7 +288,7 @@ export default {
   'delete': 'Delete',
   'document': 'User Manual',
   'download': 'Download',
-  'getDesktopApp': 'Get Desktop App',
+  'getDesktopApp': 'API Docs',
   'duplicate': 'Duplicate',
   'edit': 'Edit',
   'errors.invalidFileFormat': 'Invalid file format',

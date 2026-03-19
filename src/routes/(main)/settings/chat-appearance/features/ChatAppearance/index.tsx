@@ -160,7 +160,7 @@ const ChatAppearance = memo(() => {
             <Select
               value={general.highlighterTheme}
               options={highlighterThemes.map((item) => ({
-                label: item.displayName,
+                label: item.id === 'lobe-theme' || item.id === 'pictura-theme' ? 'Pictura Theme' : item.displayName,
                 value: item.id,
               }))}
               style={{
@@ -186,12 +186,9 @@ const ChatAppearance = memo(() => {
             <Select
               value={general.mermaidTheme}
               options={mermaidThemes.map((item) => ({
-                label: item.id === 'lobe-theme' ? 'Pictura Theme' : (item.id === 'pictura-theme' ? 'Pictura Theme' : item.displayName),
+                label: item.id === 'lobe-theme' || item.id === 'pictura-theme' ? 'Pictura Theme' : item.displayName,
                 value: item.id,
-              })).filter((item, index, self) => 
-                // Remove duplicate Pictura Theme entries
-                index === self.findIndex((t) => t.label === item.label)
-              )}
+              }))}
               style={{
                 width: 240,
               }}
