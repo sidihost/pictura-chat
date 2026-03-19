@@ -25,6 +25,7 @@ const AuthThemeLite = memo<AuthThemeLiteProps>(({ children, globalCDN }) => {
     <ThemeProvider
       appearance={currentAppearance}
       className={'auth-layout'}
+      customTheme={{ primaryColor: 'orange' }}
       defaultAppearance={currentAppearance}
       defaultThemeMode={currentAppearance}
       style={{ height: '100%' }}
