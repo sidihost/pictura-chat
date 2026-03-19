@@ -20,6 +20,20 @@ import SelectWithTTSPreview from './SelectWithTTSPreview';
 const TTS_SETTING_KEY = 'tts';
 const { openaiVoiceOptions, localeOptions } = VoiceList;
 
+// Pictts (ElevenLabs) voice options
+const picttsVoiceOptions = [
+  { label: 'Sarah (Female)', value: 'EXAVITQu4vr4xnSDxMaL' },
+  { label: 'Rachel (Female)', value: '21m00Tcm4TlvDq8ikWAM' },
+  { label: 'Bella (Female)', value: 'EXAVITQu4vr4xnSDxMaL' },
+  { label: 'Antoni (Male)', value: 'ErXwobaYiN019PkySvjV' },
+  { label: 'Josh (Male)', value: 'TxGEqnHWrfWFTfGW9XjX' },
+  { label: 'Arnold (Male)', value: 'VR6AewLTigWG4xSOukaG' },
+  { label: 'Adam (Male)', value: 'pNInz6obpgDQGcFmaJgB' },
+  { label: 'Domi (Female)', value: 'AZnzlk1XvdvUeBnXmlld' },
+  { label: 'Elli (Female)', value: 'MF3mGyEYCl7XYWbV9V6O' },
+  { label: 'Sam (Male)', value: 'yoZ06aMxZJJ28mfd3POQ' },
+];
+
 const AgentTTS = memo(() => {
   const { t } = useTranslation('setting');
   const [form] = Form.useForm();
@@ -59,6 +73,13 @@ const AgentTTS = memo(() => {
         hidden: config.ttsService !== 'openai',
         label: t('settingTTS.voice.title'),
         name: [TTS_SETTING_KEY, 'voice', 'openai'],
+      },
+      {
+        children: <Select options={picttsVoiceOptions} />,
+        desc: 'Select a Pictts voice for text-to-speech',
+        hidden: config.ttsService !== 'elevenlabs',
+        label: 'Pictts Voice',
+        name: [TTS_SETTING_KEY, 'voice', 'elevenlabs'],
       },
       {
         children: <SelectWithTTSPreview options={edgeVoiceOptions} server={'edge'} />,

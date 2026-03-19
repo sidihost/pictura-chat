@@ -75,6 +75,20 @@ export const useTTS = (content: string, config?: TTSConfig) => {
       } as MicrosoftSpeechOptions;
       break;
     }
+    case 'elevenlabs': {
+      // Pictts (ElevenLabs) TTS - use custom hook
+      useSelectedTTS = useOpenAITTS; // Use OpenAI hook as base for similar API structure
+      options = {
+        api: {
+          headers: { 'Content-Type': 'application/json' },
+          serviceUrl: '/webapi/tts/elevenlabs',
+        },
+        options: {
+          voice: config?.voice || ttsSettings.elevenlabs?.voiceId || 'EXAVITQu4vr4xnSDxMaL',
+        },
+      } as OpenAITTSOptions;
+      break;
+    }
   }
 
   return useSelectedTTS(content, {
