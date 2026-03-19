@@ -11,12 +11,18 @@ import { FileS3 } from '@/server/modules/S3';
 import { type FileService } from '@/server/services/file';
 import { type MarketService } from '@/server/services/market';
 
-import { getE2BSandboxService } from './e2b';
-
 const log = debug('lobe-server:sandbox-service');
 
 // Check if E2B is configured (has API key)
 const USE_E2B = !!process.env.E2B_API_KEY;
+
+// Lazy import E2B service only when needed
+const getE2BSandboxService = () => {
+  // Only import E2B when it's actually configured
+  if (!USE_E2B) return null;
+  const { getE2BSandboxService: getService } = require('./e2b');
+  return getService();
+};
 
 export interface ServerSandboxServiceOptions {
   fileService: FileService;
@@ -58,6 +64,19 @@ export class ServerSandboxService implements ISandboxService {
     // Use E2B if configured (self-hosted mode)
     if (USE_E2B) {
       return this.callToolWithE2B(toolName, params);
+    }
+
+    // Check if market is enabled before trying to use it
+    if (!this.marketService.isMarketEnabled()) {
+      return {
+        error: {
+          message: 'Cloud Sandbox is not available. Please configure E2B_API_KEY for code execution in self-hosted mode.',
+          name: 'SANDBOX_NOT_CONFIGURED',
+        },
+        result: null,
+        sessionExpiredAndRecreated: false,
+        success: false,
+      };
     }
 
     // Fall back to MarketService (requires LobeHub connection)
@@ -109,7 +128,7 @@ export class ServerSandboxService implements ISandboxService {
   private async callToolWithE2B(toolName: string, params: Record<string, any>): Promise<SandboxCallToolResult> {
     const e2bService = getE2BSandboxService();
 
-    if (!e2bService.isConfigured()) {
+    if (!e2bService || !e2bService.isConfigured()) {
       return {
         error: {
           message: 'E2B API key not configured. Please set E2B_API_KEY environment variable.',
