@@ -138,12 +138,12 @@ const PluginItem = memo<PluginItemProps>(({ identifier }) => {
     // Check builtin tools (like lobe-cloud-sandbox, lobe-memory, etc.)
     if (builtinTool) {
       return {
-        author: 'LobeHub',
+        author: 'Pictura',
         avatar: builtinTool.manifest.meta.avatar || '',
         category: undefined,
         createdAt: '',
         description: builtinTool.manifest.meta.description || '',
-        homepage: 'https://lobehub.com',
+        homepage: 'https://pictura.ai',
         identifier: builtinTool.identifier,
         manifest: undefined,
         related: [],
