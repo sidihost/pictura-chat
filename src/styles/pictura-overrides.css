@@ -62,16 +62,16 @@ button[style*="c87941"] svg,
 }
 
 /* ============================================
-   MENU/LIST ITEMS - Better icon visibility
+   MENU/LIST ITEMS - Brand color icons
    ============================================ */
 
-/* Menu items - stronger icon colors */
+/* Menu items - use Pictura brand color */
 .ant-menu-item .anticon,
 .ant-menu-item svg,
 [class*="MenuItem"] svg,
 [class*="menu-item"] svg,
 [class*="MenuList"] svg {
-  color: #444 !important;
+  color: #C87941 !important;
   opacity: 1 !important;
 }
 
@@ -79,13 +79,13 @@ button[style*="c87941"] svg,
 .ant-menu-item:hover svg,
 [class*="MenuItem"]:hover svg,
 [class*="menu-item"]:hover svg {
-  color: #C87941 !important;
+  color: #a5612e !important; /* Darker shade on hover */
 }
 
-/* Settings/Profile list items */
+/* Settings/Profile list items - brand color */
 [class*="List"] [class*="Item"] svg,
 [class*="list"] [class*="item"] svg {
-  color: #444 !important;
+  color: #C87941 !important;
   opacity: 1 !important;
 }
 
@@ -111,14 +111,15 @@ a:hover {
    CHAT INPUT - Action bar icons
    ============================================ */
 
-/* Ensure the model selector and other action icons are visible */
+/* Action bar icons use brand color */
 [class*="ActionBar"] svg,
 [class*="actionBar"] svg {
-  opacity: 0.8;
+  color: #C87941 !important;
+  opacity: 1;
 }
 
 [class*="ActionBar"]:hover svg,
 [class*="actionBar"]:hover svg {
   opacity: 1;
-  color: #C87941 !important;
+  color: #a5612e !important; /* Darker shade on hover */
 }
