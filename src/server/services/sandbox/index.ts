@@ -11,7 +11,12 @@ import { FileS3 } from '@/server/modules/S3';
 import { type FileService } from '@/server/services/file';
 import { type MarketService } from '@/server/services/market';
 
+import { getE2BSandboxService } from './e2b';
+
 const log = debug('lobe-server:sandbox-service');
+
+// Check if E2B is configured (has API key)
+const USE_E2B = !!process.env.E2B_API_KEY;
 
 export interface ServerSandboxServiceOptions {
   fileService: FileService;
@@ -45,11 +50,17 @@ export class ServerSandboxService implements ISandboxService {
   }
 
   /**
-   * Call a sandbox tool via MarketService
+   * Call a sandbox tool via E2B (if configured) or MarketService
    */
   async callTool(toolName: string, params: Record<string, any>): Promise<SandboxCallToolResult> {
-    log('Calling sandbox tool: %s with params: %O, topicId: %s', toolName, params, this.topicId);
+    log('Calling sandbox tool: %s with params: %O, topicId: %s, useE2B: %s', toolName, params, this.topicId, USE_E2B);
 
+    // Use E2B if configured (self-hosted mode)
+    if (USE_E2B) {
+      return this.callToolWithE2B(toolName, params);
+    }
+
+    // Fall back to MarketService (requires LobeHub connection)
     try {
       const response = await this.marketService
         .getSDK()
@@ -84,6 +95,80 @@ export class ServerSandboxService implements ISandboxService {
         error: {
           message: (error as Error).message,
           name: (error as Error).name,
+        },
+        result: null,
+        sessionExpiredAndRecreated: false,
+        success: false,
+      };
+    }
+  }
+
+  /**
+   * Execute code using E2B sandbox
+   */
+  private async callToolWithE2B(toolName: string, params: Record<string, any>): Promise<SandboxCallToolResult> {
+    const e2bService = getE2BSandboxService();
+
+    if (!e2bService.isConfigured()) {
+      return {
+        error: {
+          message: 'E2B API key not configured. Please set E2B_API_KEY environment variable.',
+          name: 'E2B_NOT_CONFIGURED',
+        },
+        result: null,
+        sessionExpiredAndRecreated: false,
+        success: false,
+      };
+    }
+
+    try {
+      // Handle different tool types
+      if (toolName === 'runPython' || toolName === 'executeCode') {
+        const code = params.code || params.content || '';
+        const language = params.language || 'python';
+
+        let result;
+        if (language === 'javascript' || language === 'js' || language === 'nodejs') {
+          result = await e2bService.executeJavaScript(code);
+        } else {
+          result = await e2bService.executePython(code);
+        }
+
+        if (!result.success) {
+          return {
+            error: {
+              message: result.error?.message || 'Execution failed',
+              name: result.error?.code,
+            },
+            result: null,
+            sessionExpiredAndRecreated: false,
+            success: false,
+          };
+        }
+
+        return {
+          result: result.output,
+          sessionExpiredAndRecreated: false,
+          success: true,
+        };
+      }
+
+      // For unsupported tools, return a helpful message
+      return {
+        error: {
+          message: `Tool "${toolName}" is not supported in E2B self-hosted mode. Supported tools: runPython, executeCode`,
+          name: 'UNSUPPORTED_TOOL',
+        },
+        result: null,
+        sessionExpiredAndRecreated: false,
+        success: false,
+      };
+    } catch (error) {
+      log('E2B execution error: %O', error);
+      return {
+        error: {
+          message: (error as Error).message,
+          name: 'E2B_ERROR',
         },
         result: null,
         sessionExpiredAndRecreated: false,
