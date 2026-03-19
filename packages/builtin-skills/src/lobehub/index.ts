@@ -29,9 +29,9 @@ export const LobeHubSkill: BuiltinSkill = {
   avatar: LOBEHUB_AVATAR,
   content: systemPrompt,
   description:
-    'Manage the LobeHub platform via CLI — knowledge bases, memory, agents, files, search, generation, and more.',
+    'Manage the Pictura platform via CLI — knowledge bases, memory, agents, files, search, generation, and more.',
   identifier: LobeHubIdentifier,
-  name: 'LobeHub',
+  name: 'Pictura',
   resources: toResourceMeta({
     'references/agent': agent,
     'references/bot': bot,

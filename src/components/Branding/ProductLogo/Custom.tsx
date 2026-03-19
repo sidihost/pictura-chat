@@ -24,6 +24,7 @@ const CustomTextLogo = memo<FlexboxProps & { size: number }>(({ size, style, ...
     <Flexbox
       height={size}
       style={{
+        color: '#C87941', // Pictura brand color
         fontSize: size / 1.5,
         fontWeight: 'bolder',
         userSelect: 'none',
