@@ -2,12 +2,14 @@
 
 import { X } from 'lucide-react';
 import { memo, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Eid Mubarak greeting - expires March 21, 2026 at midnight UTC
 const EID_EXPIRY_DATE = new Date('2026-03-21T23:59:59Z').getTime();
 const STORAGE_KEY = 'pictura-eid-greeting-dismissed';
 
 const EidGreeting = memo(() => {
+  const { t } = useTranslation('common');
   const [isVisible, setIsVisible] = useState(false);
   const [isExpired, setIsExpired] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
@@ -320,21 +322,21 @@ const EidGreeting = memo(() => {
           </div>
           
           <div className="eid-text-content">
-            <p className="eid-greeting-text">Blessed Celebration</p>
-            <h2 className="eid-title">Eid Mubarak</h2>
+            <p className="eid-greeting-text">{t('eid.blessedCelebration')}</p>
+            <h2 className="eid-title">{t('eid.mubarak')}</h2>
             <p className="eid-message">
-              May this special day bring peace, happiness, and prosperity to you and your loved ones.
+              {t('eid.message')}
             </p>
             <div className="eid-signature">
               <span className="eid-signature-line" />
-              <span>Pictura AI Team</span>
+              <span>{t('eid.signature')}</span>
             </div>
           </div>
           
           <button
             className="eid-dismiss"
             onClick={handleDismiss}
-            aria-label="Dismiss greeting"
+            aria-label={t('eid.dismiss')}
           >
             <X color="rgba(255,255,255,0.8)" size={18} />
           </button>
