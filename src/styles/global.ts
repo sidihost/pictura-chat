@@ -74,4 +74,16 @@ export default ({ token }: { prefixCls: string; token: Theme }) => css`
   ) {
     opacity: 1;
   }
+
+  /* Pictura AI: Force white text/icons on primary buttons */
+  [class*="studio_send"] button,
+  [class*="SendButton"],
+  button[class*="primary"] {
+    color: white !important;
+    
+    svg {
+      color: white !important;
+      fill: white !important;
+    }
+  }
 `;
