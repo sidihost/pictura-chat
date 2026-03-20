@@ -14,8 +14,12 @@ const SkillSourceTag = memo<SkillSourceTagProps>(({ source }) => {
   switch (source) {
     case 'builtin': {
       return (
-        <Tag color={'success'} icon={<Icon icon={BadgeCheck} />} size={'small'}>
-          LobeHub
+        <Tag 
+          icon={<Icon icon={BadgeCheck} />} 
+          size={'small'}
+          style={{ backgroundColor: 'rgba(200, 121, 65, 0.15)', color: '#C87941', borderColor: '#C87941' }}
+        >
+          Pictura
         </Tag>
       );
     }

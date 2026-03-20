@@ -17,28 +17,9 @@
         inset: 0;
         z-index: 99999;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         background: inherit;
-        gap: 16px;
-      }
-      #loading-brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: #1f1f1f;
-      }
-      #loading-brand-text {
-        font-size: 24px;
-        font-weight: 700;
-        color: #C87941;
-      }
-      html[data-theme='dark'] #loading-brand {
-        color: #f0f0f0;
-      }
-      html[data-theme='dark'] #loading-brand-text {
-        color: #C87941;
       }
       .loading-spinner {
         width: 24px;
@@ -125,11 +106,7 @@
   </head>
 
   <body>
-    <div id="loading-screen">
-      <div id="loading-brand" aria-label="Loading" role="status">
-        <img src="/icons/pictura-logo.svg" alt="Pictura AI" width="48" height="48" />
-        <span id="loading-brand-text">Pictura AI</span>
-      </div>
+    <div id="loading-screen" aria-label="Loading" role="status">
       <div class="loading-spinner"></div>
     </div>
     <div id="root" style="height: 100%"></div>
