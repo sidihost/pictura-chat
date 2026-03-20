@@ -2,6 +2,7 @@ import { type ModelPerformance, type ModelUsage } from '@lobechat/types';
 import { Center, Flexbox } from '@lobehub/ui';
 
 import PicturaModelIcon from '@/components/PicturaModelIcon';
+import { getPicturaModelName } from '@/utils/picturaModelName';
 import { createStaticStyles } from 'antd-style';
 import isEqual from 'fast-deep-equal';
 import { memo } from 'react';
@@ -33,7 +34,7 @@ const Usage = memo<UsageProps>(({ model, usage, performance, provider }) => {
     >
       <Center horizontal gap={4} style={{ fontSize: 12 }}>
         <PicturaModelIcon model={model as string} />
-        {model}
+        {getPicturaModelName(model)}
       </Center>
 
       {!!usage?.totalTokens && (

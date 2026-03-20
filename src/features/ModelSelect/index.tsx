@@ -5,6 +5,8 @@ import { type ReactNode } from 'react';
 import { memo, useMemo } from 'react';
 
 import { ModelItemRender, ProviderItemRender, TAG_CLASSNAME } from '@/components/ModelSelect';
+import PicturaModelIcon from '@/components/PicturaModelIcon';
+import { getPicturaModelName, isPicturaModel } from '@/utils/picturaModelName';
 import { useEnabledChatModels } from '@/hooks/useEnabledChatModels';
 import { type EnabledProviderWithModels } from '@/types/aiProvider';
 
@@ -131,6 +133,20 @@ const ModelSelect = memo<ModelSelectProps>(
               showInfoTag={false}
             />
           )}
+          labelRender={(labelProps) => {
+            // Get the model ID from the value (format: provider/modelId)
+            const modelId = labelProps.value?.toString().split('/').slice(1).join('/') || '';
+            // Find the option to get displayName
+            const option = options?.flatMap((opt: any) => opt.options || [opt]).find((o: any) => o.value === labelProps.value);
+            const displayName = option?.displayName || getPicturaModelName(modelId) || modelId;
+            
+            return (
+              <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <PicturaModelIcon model={modelId} size={18} />
+                {displayName}
+              </span>
+            );
+          }}
           style={{
             minWidth: 200,
             width: initialWidth ? 'initial' : undefined,
