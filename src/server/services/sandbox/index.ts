@@ -123,7 +123,7 @@ export class ServerSandboxService implements ISandboxService {
   }
 
   /**
-   * Execute code using E2B sandbox
+   * Execute code using E2B sandbox - supports code execution and document creation
    */
   private async callToolWithE2B(toolName: string, params: Record<string, any>): Promise<SandboxCallToolResult> {
     const e2bService = getE2BSandboxService();
@@ -141,8 +141,8 @@ export class ServerSandboxService implements ISandboxService {
     }
 
     try {
-      // Handle different tool types
-      if (toolName === 'runPython' || toolName === 'executeCode') {
+      // Handle code execution
+      if (toolName === 'runPython' || toolName === 'executeCode' || toolName === 'run_code') {
         const code = params.code || params.content || '';
         const language = params.language || 'python';
 
@@ -172,11 +172,74 @@ export class ServerSandboxService implements ISandboxService {
         };
       }
 
-      // For unsupported tools, return a helpful message
+      // Handle document creation
+      if (toolName === 'createDocument' || toolName === 'create_document' || toolName === 'generateFile') {
+        const fileType = params.type || params.fileType || params.format || 'txt';
+        const content = params.content || params.text || '';
+        const filename = params.filename || params.name || `document.${fileType}`;
+        const options = {
+          author: params.author,
+          headers: params.headers,
+          rows: params.rows,
+          title: params.title,
+        };
+
+        const result = await e2bService.createDocument(fileType, content, filename, options);
+
+        if (!result.success) {
+          return {
+            error: {
+              message: result.error?.message || 'Document creation failed',
+              name: result.error?.code,
+            },
+            result: null,
+            sessionExpiredAndRecreated: false,
+            success: false,
+          };
+        }
+
+        // Return document data for download
+        return {
+          result: {
+            fileData: result.fileData,
+            filename: result.filename,
+            message: result.output,
+            mimeType: result.mimeType,
+          },
+          sessionExpiredAndRecreated: false,
+          success: true,
+        };
+      }
+
+      // Handle install and run
+      if (toolName === 'installAndRun' || toolName === 'install_and_run') {
+        const packages = params.packages || [];
+        const code = params.code || '';
+        const result = await e2bService.installAndRun(packages, code);
+
+        return {
+          result: result.output,
+          sessionExpiredAndRecreated: false,
+          success: result.success,
+        };
+      }
+
+      // For other tools, try running as Python code
+      if (params.code || params.content) {
+        const code = params.code || params.content;
+        const result = await e2bService.executePython(code);
+        return {
+          result: result.output,
+          sessionExpiredAndRecreated: false,
+          success: result.success,
+        };
+      }
+
+      // Return supported tools list
       return {
         error: {
-          message: `Tool "${toolName}" is not supported in E2B self-hosted mode. Supported tools: runPython, executeCode`,
-          name: 'UNSUPPORTED_TOOL',
+          message: `Tool "${toolName}" - try using: runPython, executeCode, createDocument (docx/pdf/xlsx/csv/html/json/pptx/txt), installAndRun`,
+          name: 'TOOL_HINT',
         },
         result: null,
         sessionExpiredAndRecreated: false,
