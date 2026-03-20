@@ -29,10 +29,11 @@ const APP_URL = process.env.APP_URL
 // Falls back to APP_URL if not set
 const INTERNAL_APP_URL = process.env.INTERNAL_APP_URL || APP_URL;
 
-// Pictura AI: Use your own hosted agents and plugins index
-const ASSISTANT_INDEX_URL = 'https://agents.picturaai.sbs';
+// Pictura AI: Use LobeHub registry until custom index is set up
+// To use your own, set AGENTS_INDEX_URL and PLUGINS_INDEX_URL env vars to your URLs
+const ASSISTANT_INDEX_URL = 'https://registry.npmmirror.com/@lobehub/agents-index/v1/files/public';
 
-const PLUGINS_INDEX_URL = 'https://plugins.picturaai.sbs';
+const PLUGINS_INDEX_URL = 'https://registry.npmmirror.com/@lobehub/plugins-index/v1/files/public';
 
 export const getAppConfig = () => {
   return createEnv({
