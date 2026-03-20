@@ -1,7 +1,8 @@
 import { type ModelRankItem } from '@lobechat/types';
 import { BarList } from '@lobehub/charts';
-import { ModelIcon } from '@lobehub/icons';
 import { ActionIcon, Modal } from '@lobehub/ui';
+
+import PicturaModelIcon from '@/components/PicturaModelIcon';
 import { MaximizeIcon } from 'lucide-react';
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -22,7 +23,7 @@ export const TopicsRank = memo(() => {
 
   const mapData = (item: ModelRankItem) => {
     return {
-      icon: <ModelIcon model={item.id as string} size={20} />,
+      icon: <PicturaModelIcon model={item.id as string} size={20} />,
       id: item.id,
 
       name: item.id,

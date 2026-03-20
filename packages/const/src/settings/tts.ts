@@ -6,8 +6,9 @@ export const DEFAULT_TTS_CONFIG: UserTTSConfig = {
     ttsModel: 'tts-1',
   },
   elevenlabs: {
+    model: 'eleven_multilingual_v2',
     voiceId: 'EXAVITQu4vr4xnSDxMaL', // Sarah - default female voice
   },
   sttAutoStop: true,
-  sttServer: 'openai',
+  sttServer: 'elevenlabs', // Pictts (ElevenLabs) as default TTS
 };

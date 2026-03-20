@@ -1,6 +1,8 @@
 import { type ModelPerformance, type ModelUsage } from '@lobechat/types';
-import { ModelIcon } from '@lobehub/icons';
 import { Center, Flexbox } from '@lobehub/ui';
+
+import PicturaModelIcon from '@/components/PicturaModelIcon';
+import { getPicturaModelName } from '@/utils/picturaModelName';
 import { createStaticStyles } from 'antd-style';
 import isEqual from 'fast-deep-equal';
 import { memo } from 'react';
@@ -31,8 +33,8 @@ const Usage = memo<UsageProps>(({ model, usage, performance, provider }) => {
       justify={'space-between'}
     >
       <Center horizontal gap={4} style={{ fontSize: 12 }}>
-        <ModelIcon model={model as string} type={'mono'} />
-        {model}
+        <PicturaModelIcon model={model as string} />
+        {getPicturaModelName(model)}
       </Center>
 
       {!!usage?.totalTokens && (
