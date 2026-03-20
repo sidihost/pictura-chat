@@ -1,4 +1,4 @@
-export const DEFAULT_MODEL = 'pixtral-large-latest';
+export const DEFAULT_MODEL = 'mistral-medium-latest';
 export const DEFAULT_MINI_MODEL = 'mistral-small-latest';
 
 export const DEFAULT_EMBEDDING_MODEL = 'text-embedding-3-small';
