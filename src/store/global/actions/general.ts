@@ -94,24 +94,22 @@ export class GlobalGeneralActionImpl {
     }
   };
 
-  switchLocale = (
+  switchLocale = async (
     locale: LocaleMode,
     { skipBroadcast }: { skipBroadcast?: boolean } = {},
-  ): void => {
+  ): Promise<void> => {
     this.#get().updateSystemStatus({ language: locale });
 
-    switchLang(locale);
+    await switchLang(locale);
 
     if (isDesktop && !skipBroadcast) {
-      (async () => {
-        try {
-          const { ensureElectronIpc } = await import('@/utils/electron/ipc');
+      try {
+        const { ensureElectronIpc } = await import('@/utils/electron/ipc');
 
-          await ensureElectronIpc().system.updateLocale(locale);
-        } catch (error) {
-          console.error('Failed to update locale in main process:', error);
-        }
-      })();
+        await ensureElectronIpc().system.updateLocale(locale);
+      } catch (error) {
+        console.error('Failed to update locale in main process:', error);
+      }
     }
   };
 
@@ -200,7 +198,7 @@ export class GlobalGeneralActionImpl {
           // │ 1.1.0 → 1.0.5   │ 5      │ ⚠️ Too old│
           // ├─────────────────┼────────┼───────────┤
           // │ 2.0.0 → 1.9.9   │ 91     │ ⚠️ Too old│
-          // ├─────────────────┼────────┼───────────┤
+          // ├─────────────────┼────────��───────────┤
           // │ 1.0.4 → 1.0.0   │ 4      │ ✅ Normal │
           // └─────────────────┴────────┴───────────┘
           const versionDiff =
