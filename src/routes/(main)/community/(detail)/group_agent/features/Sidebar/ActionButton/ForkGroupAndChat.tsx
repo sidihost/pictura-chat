@@ -87,7 +87,7 @@ const ForkGroupAndChat = memo<{ mobile?: boolean }>(() => {
         return role === 'supervisor';
       });
 
-      // Prepare supervisor config
+      // Prepare supervisor config - override model/provider to use Pictura (Mistral)
       let supervisorConfig;
       if (supervisorMember) {
         const member = supervisorMember as any;
@@ -98,10 +98,12 @@ const ForkGroupAndChat = memo<{ mobile?: boolean }>(() => {
           backgroundColor: currentVersion.backgroundColor,
           chatConfig: currentVersion.config?.chatConfig || currentVersion.chatConfig,
           description: currentVersion.description,
-          model: currentVersion.config?.model || currentVersion.model,
+          // Force use Pictura (Mistral) model
+          model: 'mistral-medium-latest',
           params: currentVersion.config?.params || currentVersion.params,
           plugins: currentVersion.config?.plugins || currentVersion.plugins,
-          provider: currentVersion.config?.provider || currentVersion.provider,
+          // Force use Pictura (Mistral) provider
+          provider: 'mistral',
           systemRole:
             currentVersion.config?.systemRole ||
             currentVersion.config?.systemPrompt ||
@@ -131,6 +133,7 @@ const ForkGroupAndChat = memo<{ mobile?: boolean }>(() => {
 
       // Step 3: Prepare member agents from market data
       // Filter out supervisor role as it will be created separately using supervisorConfig
+      // Override model/provider to use Pictura (Mistral) for all members
       const members = memberAgents
         .filter((member: any) => {
           const agent = member.agent || member;
@@ -145,9 +148,11 @@ const ForkGroupAndChat = memo<{ mobile?: boolean }>(() => {
             backgroundColor: currentVersion.backgroundColor,
             chatConfig: currentVersion.config?.chatConfig || currentVersion.chatConfig,
             description: currentVersion.description,
-            model: currentVersion.config?.model || currentVersion.model,
+            // Force use Pictura (Mistral) model
+            model: 'mistral-medium-latest',
             plugins: currentVersion.config?.plugins || currentVersion.plugins,
-            provider: currentVersion.config?.provider || currentVersion.provider,
+            // Force use Pictura (Mistral) provider
+            provider: 'mistral',
             systemRole:
               currentVersion.config?.systemRole ||
               currentVersion.config?.systemPrompt ||

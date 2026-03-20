@@ -71,12 +71,16 @@ const ForkAndChat = memo<{ mobile?: boolean }>(({ mobile }) => {
       // Step 2: Create agent config directly (no market API call needed)
       if (!config) throw new Error('Agent config is missing');
 
+      // Override model and provider to use Pictura (Mistral) instead of original agent's settings
       const agentData = {
         config: {
           ...config,
           editorData,
           ...meta,
           marketIdentifier: newIdentifier,
+          // Force use Pictura (Mistral) model instead of original agent's model
+          model: 'mistral-medium-latest',
+          provider: 'mistral',
           params: {
             ...config.params,
             forkedFromIdentifier: identifier, // Store the source agent identifier
