@@ -94,7 +94,6 @@ const EidGreeting = memo(() => {
           animation: eidSlideIn 0.5s ease-out forwards;
           background: #C87941;
           border-radius: 16px;
-          box-shadow: 0 4px 20px rgba(200, 121, 65, 0.35);
           color: white;
           margin: 12px auto;
           max-width: 500px;
@@ -135,7 +134,6 @@ const EidGreeting = memo(() => {
           font-size: 20px;
           font-weight: 700;
           letter-spacing: 0.5px;
-          text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .eid-greeting-message {
           font-size: 14px;
