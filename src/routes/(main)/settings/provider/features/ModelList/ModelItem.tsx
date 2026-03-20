@@ -1,5 +1,6 @@
-import { ModelIcon } from '@lobehub/icons';
 import { ActionIcon, copyToClipboard, Flexbox, Tag, Text } from '@lobehub/ui';
+
+import PicturaModelIcon from '@/components/PicturaModelIcon';
 import { App, Switch } from 'antd';
 import { createStaticStyles, cssVar } from 'antd-style';
 import { LucidePencil, TrashIcon } from 'lucide-react';
@@ -233,7 +234,7 @@ const ModelItem = memo<ModelItemProps>(
         width={'100%'}
       >
         <Flexbox horizontal align={'center'} flex={1} gap={16} style={{ minWidth: 0 }}>
-          <ModelIcon model={id} size={32} />
+          <PicturaModelIcon model={id} size={32} />
           <Flexbox flex={1} gap={4} style={{ minWidth: 0 }}>
             <Flexbox horizontal align={'center'} gap={8}>
               {displayName || id}
@@ -267,7 +268,7 @@ const ModelItem = memo<ModelItemProps>(
         width={'100%'}
       >
         <Flexbox horizontal align={'center'} flex={1} gap={8} style={{ minWidth: 0 }}>
-          <ModelIcon model={id} size={32} />
+          <PicturaModelIcon model={id} size={32} />
           <Flexbox flex={1} gap={2} style={{ minWidth: 0 }}>
             <Flexbox horizontal align={'center'} gap={8}>
               {displayName || id}

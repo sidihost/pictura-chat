@@ -1,6 +1,8 @@
 import { type ChatModelCard } from '@lobechat/types';
 import { type IconAvatarProps } from '@lobehub/icons';
-import { LobeHub, ModelIcon, ProviderIcon } from '@lobehub/icons';
+import { LobeHub, ProviderIcon } from '@lobehub/icons';
+
+import PicturaModelIcon from '@/components/PicturaModelIcon';
 import { type FlexboxProps } from '@lobehub/ui';
 import { Avatar, Flexbox, Icon, Tag, Text, Tooltip } from '@lobehub/ui';
 import { createStaticStyles, useResponsive } from 'antd-style';
@@ -281,7 +283,7 @@ export const ModelItemRender = memo<ModelItemRenderProps>(
           gap={8}
           style={{ flexShrink: 1, minWidth: 0, overflow: 'hidden' }}
         >
-          <ModelIcon model={id} size={20} />
+          <PicturaModelIcon model={id} size={20} />
           <Text
             style={mobile ? { maxWidth: '60vw' } : { minWidth: 0, overflow: 'hidden' }}
             ellipsis={{

@@ -1,5 +1,7 @@
-import { ModelIcon, ProviderIcon } from '@lobehub/icons';
+import { ProviderIcon } from '@lobehub/icons';
 import { ActionIcon, Flexbox, Modal } from '@lobehub/ui';
+
+import PicturaModelIcon from '@/components/PicturaModelIcon';
 import { cssVar } from 'antd-style';
 import { MaximizeIcon } from 'lucide-react';
 import { memo, useMemo, useState } from 'react';
@@ -67,16 +69,10 @@ const ActiveModels = memo<UsageChartProps>(({ data, isLoading, groupBy }) => {
               {iconList.map((item, i) => {
                 if (!item) return null;
                 return groupBy === GroupBy.Model ? (
-                  <ModelIcon
+                  <PicturaModelIcon
                     key={item}
                     model={item}
                     size={18}
-                    style={{
-                      border: `2px solid ${cssVar.colorBgContainer}`,
-                      boxSizing: 'content-box',
-                      marginRight: -8,
-                      zIndex: i + 1,
-                    }}
                   />
                 ) : (
                   <ProviderIcon

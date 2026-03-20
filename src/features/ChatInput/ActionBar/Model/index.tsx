@@ -1,6 +1,7 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { ModelIcon } from '@lobehub/icons';
 import { Center, Flexbox } from '@lobehub/ui';
+
+import PicturaModelIcon from '@/components/PicturaModelIcon';
 import { Spin } from 'antd';
 import { createStaticStyles, cx } from 'antd-style';
 import { Settings2Icon } from 'lucide-react';
@@ -92,7 +93,7 @@ const ModelSwitch = memo(() => {
           width={36}
         >
           <div className={styles.icon}>
-            <ModelIcon model={model} size={22} />
+            <PicturaModelIcon model={model} size={22} />
           </div>
         </Center>
       </ModelSwitchPanel>
