@@ -28,6 +28,9 @@ export class AssistantStore {
 
   getAgentIndex = async (locale: Locales = DEFAULT_LANG): Promise<any[]> => {
     let res: Response;
+    // Fallback to LobeHub registry if custom URL fails
+    const FALLBACK_URL = 'https://registry.npmmirror.com/@lobehub/agents-index/v1/files/public';
+    
     try {
       res = await fetch(this.getAgentIndexUrl(locale as any), {
         cache: 'force-cache',
@@ -41,6 +44,16 @@ export class AssistantStore {
             revalidate: CacheRevalidate.List,
             tags: [CacheTag.Discover, CacheTag.Assistants],
           },
+        });
+      }
+
+      // If still not working, try fallback
+      if (!res.ok && this.baseUrl !== FALLBACK_URL) {
+        console.warn('Primary agent index failed, trying fallback...');
+        const fallbackUrl = urlJoin(FALLBACK_URL, `index.${normalizeLocale(locale as any)}.json`);
+        res = await fetch(fallbackUrl, {
+          cache: 'force-cache',
+          next: { revalidate: CacheRevalidate.List, tags: [CacheTag.Discover, CacheTag.Assistants] },
         });
       }
 
