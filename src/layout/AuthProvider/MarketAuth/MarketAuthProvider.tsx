@@ -160,8 +160,8 @@ export const MarketAuthProvider = ({ children, isDesktop }: MarketAuthProviderPr
   // Initialize OIDC client (client-side only)
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Use Pictura AI market for agents and plugins  
-      const baseUrl = process.env.NEXT_PUBLIC_MARKET_BASE_URL || 'https://agents.picturaai.sbs';
+      // Use LobeHub market for OIDC auth (agent browsing doesn't require auth)
+      const baseUrl = process.env.NEXT_PUBLIC_MARKET_BASE_URL || 'https://market.lobehub.com';
       
       const desktopRedirectUri = new URL(MARKET_OIDC_ENDPOINTS.desktopCallback, baseUrl).toString();
 
