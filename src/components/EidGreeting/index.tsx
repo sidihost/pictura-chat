@@ -10,6 +10,7 @@ const STORAGE_KEY = 'pictura-eid-greeting-dismissed';
 const EidGreeting = memo(() => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpired, setIsExpired] = useState(true);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     // Check if greeting has expired
@@ -31,8 +32,11 @@ const EidGreeting = memo(() => {
   }, []);
 
   const handleDismiss = () => {
-    setIsVisible(false);
-    localStorage.setItem(STORAGE_KEY, 'true');
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      localStorage.setItem(STORAGE_KEY, 'true');
+    }, 300);
   };
 
   if (isExpired || !isVisible) {
@@ -40,57 +44,183 @@ const EidGreeting = memo(() => {
   }
 
   return (
-    <div
-      style={{
-        alignItems: 'center',
-        animation: 'fadeIn 0.5s ease-in-out',
-        background: 'linear-gradient(135deg, #C87941 0%, #D4A574 50%, #C87941 100%)',
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px rgba(200, 121, 65, 0.3)',
-        color: 'white',
-        display: 'flex',
-        gap: '12px',
-        justifyContent: 'space-between',
-        margin: '12px auto',
-        maxWidth: '500px',
-        padding: '16px 20px',
-        position: 'relative',
-        width: 'calc(100% - 24px)',
-      }}
-    >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        <div style={{ alignItems: 'center', display: 'flex', gap: '8px' }}>
-          <span style={{ fontSize: '24px' }}>&#127769;</span>
-          <span style={{ fontWeight: 600, fontSize: '16px' }}>Eid Mubarak!</span>
-          <span style={{ fontSize: '24px' }}>&#127769;</span>
+    <>
+      <style>{`
+        @keyframes eidSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        @keyframes eidSlideOut {
+          from {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+          }
+        }
+        @keyframes eidPulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+        }
+        @keyframes eidFloat {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-3px);
+          }
+        }
+        @keyframes eidShimmer {
+          0% {
+            background-position: -200% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
+        .eid-greeting-container {
+          animation: eidSlideIn 0.5s ease-out forwards;
+          background: #C87941;
+          border-radius: 16px;
+          box-shadow: 0 4px 20px rgba(200, 121, 65, 0.35);
+          color: white;
+          margin: 12px auto;
+          max-width: 500px;
+          overflow: hidden;
+          padding: 20px 24px;
+          position: relative;
+          width: calc(100% - 24px);
+        }
+        .eid-greeting-container.closing {
+          animation: eidSlideOut 0.3s ease-in forwards;
+        }
+        .eid-greeting-content {
+          align-items: flex-start;
+          display: flex;
+          gap: 12px;
+          justify-content: space-between;
+          position: relative;
+          z-index: 2;
+        }
+        .eid-greeting-text {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .eid-greeting-header {
+          align-items: center;
+          display: flex;
+          gap: 10px;
+        }
+        .eid-greeting-moon {
+          animation: eidFloat 2s ease-in-out infinite;
+          font-size: 28px;
+        }
+        .eid-greeting-moon:last-child {
+          animation-delay: 0.5s;
+        }
+        .eid-greeting-title {
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .eid-greeting-message {
+          font-size: 14px;
+          line-height: 1.5;
+          margin: 0;
+          opacity: 0.95;
+        }
+        .eid-greeting-signature {
+          font-size: 12px;
+          font-style: italic;
+          margin: 0;
+          opacity: 0.85;
+        }
+        .eid-greeting-dismiss {
+          align-items: center;
+          background: rgba(255,255,255,0.15);
+          backdrop-filter: blur(4px);
+          border: none;
+          border-radius: 50%;
+          cursor: pointer;
+          display: flex;
+          flex-shrink: 0;
+          height: 32px;
+          justify-content: center;
+          transition: all 0.2s ease;
+          width: 32px;
+        }
+        .eid-greeting-dismiss:hover {
+          background: rgba(255,255,255,0.3);
+          transform: scale(1.1);
+        }
+        .eid-greeting-dismiss:active {
+          transform: scale(0.95);
+        }
+        /* Responsive styles */
+        @media (max-width: 480px) {
+          .eid-greeting-container {
+            border-radius: 12px;
+            margin: 8px;
+            padding: 16px;
+            width: calc(100% - 16px);
+          }
+          .eid-greeting-moon {
+            font-size: 22px;
+          }
+          .eid-greeting-title {
+            font-size: 17px;
+          }
+          .eid-greeting-message {
+            font-size: 13px;
+          }
+          .eid-greeting-signature {
+            font-size: 11px;
+          }
+          .eid-greeting-dismiss {
+            height: 28px;
+            width: 28px;
+          }
+        }
+      `}</style>
+      <div className={`eid-greeting-container ${isClosing ? 'closing' : ''}`}>
+        <div className="eid-greeting-content">
+          <div className="eid-greeting-text">
+            <div className="eid-greeting-header">
+              <span className="eid-greeting-moon">&#127769;</span>
+              <span className="eid-greeting-title">Eid Mubarak!</span>
+              <span className="eid-greeting-moon">&#127769;</span>
+            </div>
+            <p className="eid-greeting-message">
+              Wishing you and your loved ones a blessed Eid filled with joy, peace, and prosperity.
+            </p>
+            <p className="eid-greeting-signature">
+              - From the Pictura AI Team
+            </p>
+          </div>
+          <button
+            className="eid-greeting-dismiss"
+            onClick={handleDismiss}
+            title="Dismiss"
+          >
+            <X color="white" size={16} />
+          </button>
         </div>
-        <p style={{ fontSize: '13px', margin: 0, opacity: 0.95 }}>
-          Wishing you and your loved ones a blessed Eid filled with joy, peace, and prosperity.
-        </p>
-        <p style={{ fontSize: '12px', fontStyle: 'italic', margin: 0, opacity: 0.85 }}>
-          - From the Pictura AI Team
-        </p>
       </div>
-      <button
-        onClick={handleDismiss}
-        style={{
-          alignItems: 'center',
-          background: 'rgba(255,255,255,0.2)',
-          border: 'none',
-          borderRadius: '50%',
-          cursor: 'pointer',
-          display: 'flex',
-          flexShrink: 0,
-          height: '28px',
-          justifyContent: 'center',
-          transition: 'background 0.2s',
-          width: '28px',
-        }}
-        title="Dismiss"
-      >
-        <X color="white" size={16} />
-      </button>
-    </div>
+    </>
   );
 });
 
