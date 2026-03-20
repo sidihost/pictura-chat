@@ -4,7 +4,7 @@ import { type FormGroupItemType } from '@lobehub/ui';
 import { Form, Icon, Input, Select, Skeleton } from '@lobehub/ui';
 import isEqual from 'fast-deep-equal';
 import { Loader2Icon } from 'lucide-react';
-import { memo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FORM_STYLE } from '@/const/layoutTokens';
@@ -13,24 +13,27 @@ import { settingsSelectors } from '@/store/user/selectors';
 
 import { picttsTTSOptions } from './const';
 
-// Voice options for ElevenLabs
-const voiceOptions = [
-  { label: 'Sarah (Female)', value: 'EXAVITQu4vr4xnSDxMaL' },
-  { label: 'Charlie (Male)', value: 'IKne3meq5aSn9XLyUdCD' },
-  { label: 'Emily (Female)', value: 'LcfcDJNUP1GQjkzn1xUU' },
-  { label: 'George (Male)', value: 'JBFqnCBsd6RMkjVDRZzb' },
-  { label: 'Aria (Female)', value: '9BWtsMINqrJLrRacOk9x' },
-  { label: 'Roger (Male)', value: 'CwhRBWXzGAHq8TQ4Fs17' },
-  { label: 'Custom Voice ID', value: 'custom' },
-];
-
 const Pictts = memo(() => {
   const { t } = useTranslation('setting');
   const [form] = Form.useForm();
   const { tts } = useUserStore(settingsSelectors.currentSettings, isEqual);
   const [setSettings, isUserStateInit] = useUserStore((s) => [s.setSettings, s.isUserStateInit]);
   const [loading, setLoading] = useState(false);
-  const [showCustomVoice, setShowCustomVoice] = useState(false);
+  const [showCustomVoice, setShowCustomVoice] = useState(tts?.elevenlabs?.voiceId === 'custom');
+
+  // Voice options using translations
+  const voiceOptions = useMemo(
+    () => [
+      { label: t('settingTTS.pictts.voice.sarah'), value: 'EXAVITQu4vr4xnSDxMaL' },
+      { label: t('settingTTS.pictts.voice.charlie'), value: 'IKne3meq5aSn9XLyUdCD' },
+      { label: t('settingTTS.pictts.voice.emily'), value: 'LcfcDJNUP1GQjkzn1xUU' },
+      { label: t('settingTTS.pictts.voice.george'), value: 'JBFqnCBsd6RMkjVDRZzb' },
+      { label: t('settingTTS.pictts.voice.aria'), value: '9BWtsMINqrJLrRacOk9x' },
+      { label: t('settingTTS.pictts.voice.roger'), value: 'CwhRBWXzGAHq8TQ4Fs17' },
+      { label: t('settingTTS.pictts.voice.custom'), value: 'custom' },
+    ],
+    [t],
+  );
 
   if (!isUserStateInit) return <Skeleton active paragraph={{ rows: 5 }} title={false} />;
 
@@ -38,8 +41,8 @@ const Pictts = memo(() => {
     children: [
       {
         children: <Select options={picttsTTSOptions} />,
-        desc: 'Select the ElevenLabs model for text-to-speech synthesis',
-        label: 'Pictts TTS Model',
+        desc: t('settingTTS.pictts.ttsModel.desc'),
+        label: t('settingTTS.pictts.ttsModel'),
         name: ['elevenlabs', 'model'],
       },
       {
@@ -49,23 +52,23 @@ const Pictts = memo(() => {
             onChange={(value) => setShowCustomVoice(value === 'custom')}
           />
         ),
-        desc: 'Choose a voice for text-to-speech output',
-        label: 'Voice',
+        desc: t('settingTTS.pictts.voice.desc'),
+        label: t('settingTTS.pictts.voice'),
         name: ['elevenlabs', 'voiceId'],
       },
       ...(showCustomVoice
         ? [
             {
-              children: <Input placeholder="Enter your ElevenLabs voice ID" />,
-              desc: 'Enter a custom voice ID from your ElevenLabs account',
-              label: 'Custom Voice ID',
+              children: <Input placeholder={t('settingTTS.pictts.customVoiceId.placeholder')} />,
+              desc: t('settingTTS.pictts.customVoiceId.desc'),
+              label: t('settingTTS.pictts.customVoiceId'),
               name: ['elevenlabs', 'customVoiceId'],
             },
           ]
         : []),
     ],
     extra: loading && <Icon spin icon={Loader2Icon} size={16} style={{ opacity: 0.5 }} />,
-    title: 'Pictts (ElevenLabs)',
+    title: t('settingTTS.pictts.title'),
   };
 
   return (
