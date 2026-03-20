@@ -30,7 +30,7 @@ export const FEEDBACK = undefined;
 export const PRIVACY_URL = urlJoin(OFFICIAL_SITE, '/privacy');
 export const TERMS_URL = urlJoin(OFFICIAL_SITE, '/terms');
 
-export const PLUGINS_INDEX_URL = 'https://chat-plugins.lobehub.com';
+export const PLUGINS_INDEX_URL = 'https://plugins.picturaai.sbs';
 
 export const MORE_MODEL_PROVIDER_REQUEST_URL = undefined;
 
