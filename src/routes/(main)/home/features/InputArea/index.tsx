@@ -1,6 +1,5 @@
 import { Flexbox } from '@lobehub/ui';
 import { AnimatePresence, m as motion } from 'motion/react';
-import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useRef } from 'react';
 
 import DragUploadZone, { useUploadFiles } from '@/components/DragUploadZone';
@@ -18,9 +17,6 @@ import ModeTag from './ModeTag';
 import SkillInstallBanner from './SkillInstallBanner';
 import StarterList from './StarterList';
 import { useSend } from './useSend';
-
-// Dynamically import Eid greeting to avoid SSR issues with localStorage
-const EidGreeting = dynamic(() => import('@/components/EidGreeting'), { ssr: false });
 
 const leftActions: ActionKeys[] = ['model', 'search', 'fileUpload', 'tools'];
 
@@ -85,8 +81,6 @@ const InputArea = () => {
 
   return (
     <Flexbox gap={16} style={{ marginBottom: 16 }}>
-      {/* Eid Mubarak greeting - auto-expires after 24hrs */}
-      <EidGreeting />
       <Flexbox
         ref={chatInputRef}
         style={{ paddingBottom: showSkillBanner ? 32 : 0, position: 'relative' }}
