@@ -90,6 +90,11 @@ export interface CustomClientOptions<T extends Record<string, any> = any> {
 export interface OpenAICompatibleFactoryOptions<T extends Record<string, any> = any> {
   apiKey?: string;
   baseURL?: string;
+  /**
+   * If true, disable Responses API and fall back to Chat Completions API.
+   * This is useful when using a proxy that doesn't support the Responses API.
+   */
+  disableResponsesAPI?: boolean;
   chatCompletion?: {
     excludeUsage?: boolean;
     forceImageBase64?: boolean;
@@ -187,6 +192,7 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
   debug: debugParams,
   constructorOptions,
   chatCompletion,
+  disableResponsesAPI: DEFAULT_DISABLE_RESPONSES_API,
   models,
   customClient,
   responses,
@@ -243,6 +249,8 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
     private shouldUseResponsesAPI(params: {
       /** Context for logging (e.g., 'chat', 'generateObject', 'tool calling') */
       context?: string;
+      /** If true, disable Responses API and fall back to Chat Completions API */
+      disableResponsesAPI?: boolean;
       /** Factory/instance level useResponse flag */
       flagUseResponse?: boolean;
       /** Factory/instance level model patterns for Responses API */
@@ -260,10 +268,18 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
         responseApi,
         flagUseResponse,
         flagUseResponseModels,
+        disableResponsesAPI,
         context = 'operation',
       } = params;
 
       const log = debug(`${this.logPrefix}:shouldUseResponsesAPI`);
+
+      // Priority -1: Check disableResponsesAPI FIRST - if disabled, never use Responses API
+      // This is useful when using a proxy that doesn't support the Responses API
+      if (disableResponsesAPI) {
+        log('using Chat Completions API: disableResponsesAPI=true');
+        return false;
+      }
 
       // Priority 0: Check built-in responsesAPIModels FIRST (highest priority)
       // These models MUST use Responses API regardless of user settings
@@ -343,6 +359,7 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
         const modelId = (payload as any).model as string | undefined;
 
         const instanceChat = ((this._options as any).chatCompletion || {}) as {
+          disableResponsesAPI?: boolean;
           useResponse?: boolean;
           useResponseModels?: Array<string | RegExp>;
         };
@@ -350,10 +367,13 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
           instanceChat.useResponse ?? (chatCompletion ? chatCompletion.useResponse : undefined);
         const flagUseResponseModels =
           instanceChat.useResponseModels ?? chatCompletion?.useResponseModels;
+        const flagDisableResponsesAPI =
+          instanceChat.disableResponsesAPI ?? DEFAULT_DISABLE_RESPONSES_API;
 
         // Determine if should use Responses API
         const shouldUseResponses = this.shouldUseResponsesAPI({
           context: 'chat',
+          disableResponsesAPI: flagDisableResponsesAPI,
           flagUseResponse,
           flagUseResponseModels,
           model: modelId,
@@ -724,6 +744,7 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
 
         // Factory-level Responses API routing control (supports instance override)
         const instanceGenerateObject = ((this._options as any).generateObject || {}) as {
+          disableResponsesAPI?: boolean;
           useResponse?: boolean;
           useResponseModels?: Array<string | RegExp>;
         };
@@ -732,9 +753,12 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
           (generateObjectConfig ? generateObjectConfig.useResponse : undefined);
         const flagUseResponseModels =
           instanceGenerateObject.useResponseModels ?? generateObjectConfig?.useResponseModels;
+        const flagDisableResponsesAPI =
+          instanceGenerateObject.disableResponsesAPI ?? DEFAULT_DISABLE_RESPONSES_API;
 
         const shouldUseResponses = this.shouldUseResponsesAPI({
           context: 'generateObject',
+          disableResponsesAPI: flagDisableResponsesAPI,
           flagUseResponse,
           flagUseResponseModels,
           model,
@@ -1137,6 +1161,7 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
 
       // Factory-level Responses API routing control (supports instance override)
       const instanceGenerateObject = ((this._options as any).generateObject || {}) as {
+        disableResponsesAPI?: boolean;
         useResponse?: boolean;
         useResponseModels?: Array<string | RegExp>;
       };
@@ -1145,9 +1170,12 @@ export const createOpenAICompatibleRuntime = <T extends Record<string, any> = an
         (generateObjectConfig ? generateObjectConfig.useResponse : undefined);
       const flagUseResponseModels =
         instanceGenerateObject.useResponseModels ?? generateObjectConfig?.useResponseModels;
+      const flagDisableResponsesAPI =
+        instanceGenerateObject.disableResponsesAPI ?? DEFAULT_DISABLE_RESPONSES_API;
 
       const shouldUseResponses = this.shouldUseResponsesAPI({
         context: 'tool calling',
+        disableResponsesAPI: flagDisableResponsesAPI,
         flagUseResponse,
         flagUseResponseModels,
         model,
