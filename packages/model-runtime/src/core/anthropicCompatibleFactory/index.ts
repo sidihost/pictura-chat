@@ -50,6 +50,11 @@ export interface CustomClientOptions<T extends Record<string, any> = any> {
 export interface AnthropicCompatibleFactoryOptions<T extends Record<string, any> = any> {
   apiKey?: string;
   baseURL?: string;
+  /**
+   * If true, disable beta headers. This is useful when using a proxy
+   * that doesn't support Anthropic beta features.
+   */
+  disableBetaHeaders?: boolean;
   chatCompletion?: {
     /**
      * Build an Anthropic Messages API payload from ChatStreamPayload.
@@ -244,8 +249,9 @@ export const resolveDefaultAnthropicPricingOptions = (
  */
 export const createDefaultAnthropicClient = <T extends Record<string, any> = any>(
   options: ConstructorOptions<T>,
+  disableBetaHeaders?: boolean,
 ) => {
-  const betaHeaders = process.env.ANTHROPIC_BETA_HEADERS;
+  const betaHeaders = !disableBetaHeaders ? process.env.ANTHROPIC_BETA_HEADERS : undefined;
   const defaultHeaders = {
     'User-Agent': `lobehub/${CURRENT_VERSION}`,
     ...options.defaultHeaders,
@@ -394,6 +400,7 @@ export const createAnthropicCompatibleRuntime = <T extends Record<string, any> =
   provider,
   baseURL: DEFAULT_BASE_URL = DEFAULT_ANTHROPIC_BASE_URL,
   apiKey: DEFAULT_API_KEY,
+  disableBetaHeaders: DEFAULT_DISABLE_BETA_HEADERS,
   errorType,
   debug: debugParams,
   constructorOptions,
@@ -442,10 +449,20 @@ export const createAnthropicCompatibleRuntime = <T extends Record<string, any> =
         ...rest,
       };
 
+      // Check if instance-level override is set
+      const instanceDisableBetaHeaders = (this._options as any).disableBetaHeaders;
+      const shouldDisableBetaHeaders = instanceDisableBetaHeaders ?? DEFAULT_DISABLE_BETA_HEADERS;
+
       if (customClient?.createClient) {
-        this.client = customClient.createClient(initOptions as ConstructorOptions<T>);
+        this.client = customClient.createClient(
+          initOptions as ConstructorOptions<T>,
+          shouldDisableBetaHeaders,
+        );
       } else {
-        this.client = new Anthropic(initOptions as ConstructorOptions<T>);
+        this.client = createDefaultAnthropicClient(
+          initOptions as ConstructorOptions<T>,
+          shouldDisableBetaHeaders,
+        );
       }
 
       this.baseURL = baseURL || this.client.baseURL;
