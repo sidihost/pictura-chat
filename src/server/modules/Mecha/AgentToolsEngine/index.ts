@@ -35,6 +35,9 @@ export type {
 
 const log = debug('lobe-server:agent-tools-engine');
 
+// Check if E2B is configured (has API key)
+const USE_E2B = !!process.env.E2B_API_KEY;
+
 /**
  * Initialize ToolsEngine with server-side context
  *
@@ -104,16 +107,19 @@ export const createServerAgentToolsEngine = (
   // Determine runtime mode based on platform
   const isDesktopClient = !!deviceContext?.gatewayConfigured;
   const platform = isDesktopClient ? 'desktop' : 'web';
+  // Default to 'cloud' if E2B is configured (self-hosted mode), otherwise use explicit setting or 'none'
+  const defaultRuntimeMode = isDesktopClient ? 'local' : (USE_E2B ? 'cloud' : 'none');
   const runtimeMode =
-    agentConfig.chatConfig?.runtimeEnv?.runtimeMode?.[platform] ??
-    (isDesktopClient ? 'local' : 'none');
+    agentConfig.chatConfig?.runtimeEnv?.runtimeMode?.[platform] ?? defaultRuntimeMode;
 
   log(
-    'Creating agent tools engine for model=%s, provider=%s, searchMode=%s, runtimeMode=%s, additionalManifests=%d, deviceGateway=%s',
+    'Creating agent tools engine for model=%s, provider=%s, searchMode=%s, runtimeMode=%s, defaultRuntimeMode=%s, useE2B=%s, additionalManifests=%d, deviceGateway=%s',
     model,
     provider,
     searchMode,
     runtimeMode,
+    defaultRuntimeMode,
+    USE_E2B,
     additionalManifests?.length ?? 0,
     !!deviceContext?.gatewayConfigured,
   );
