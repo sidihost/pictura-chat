@@ -481,8 +481,12 @@ export class AiProviderActionImpl {
           };
         }
 
+        // Only show specific providers in model selector
+        // Includes Vercel AI Gateway which has Claude models (claude-opus) available
+        const ALLOWED_MODEL_PROVIDERS = ['openai', 'mistral', 'vercelaigateway', 'groq', 'cloudflare'];
+
         const enabledAiProviders: EnabledProvider[] = DEFAULT_MODEL_PROVIDER_LIST.filter(
-          (provider) => provider.enabled,
+          (provider) => provider.enabled && ALLOWED_MODEL_PROVIDERS.includes(provider.id),
         ).map((item) => ({ id: item.id, name: item.name, source: AiProviderSourceEnum.Builtin }));
 
         const enabledChatAiProviders = enabledAiProviders.filter((provider) => {
