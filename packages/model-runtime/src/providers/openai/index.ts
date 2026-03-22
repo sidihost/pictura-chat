@@ -35,7 +35,8 @@ export const params = {
     handlePayload: (payload) => {
       const { enabledSearch, model, ...rest } = payload;
 
-      if (responsesAPIModels.has(model) || enabledSearch) {
+      // When disableResponsesAPI is true, always use Chat Completions API, never Responses API
+      if (!disableResponsesAPI && (responsesAPIModels.has(model) || enabledSearch)) {
         return { ...rest, apiMode: 'responses', enabledSearch, model } as ChatStreamPayload;
       }
 
