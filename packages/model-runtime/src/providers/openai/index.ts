@@ -14,6 +14,9 @@ export interface OpenAIModelCard {
 const prunePrefixes = ['o1', 'o3', 'o4', 'codex', 'computer-use', 'gpt-5'];
 const oaiSearchContextSize = process.env.OPENAI_SEARCH_CONTEXT_SIZE; // low, medium, high
 const enableServiceTierFlex = process.env.OPENAI_SERVICE_TIER_FLEX === '1';
+const openaiProxyUrl = process.env.OPENAI_PROXY_URL;
+// Disable Responses API when using a proxy that doesn't support it
+const disableResponsesAPI = !!openaiProxyUrl;
 const flexSupportedModels = ['gpt-5', 'o3', 'o4-mini']; // Flex tier is only available for these models
 
 const supportsFlexTier = (model: string) => {
@@ -26,11 +29,14 @@ const supportsFlexTier = (model: string) => {
 
 export const params = {
   baseURL: 'https://api.openai.com/v1',
+  // Disable Responses API when using a proxy that doesn't support it
+  disableResponsesAPI,
   chatCompletion: {
     handlePayload: (payload) => {
       const { enabledSearch, model, ...rest } = payload;
 
-      if (responsesAPIModels.has(model) || enabledSearch) {
+      // When disableResponsesAPI is true, always use Chat Completions API, never Responses API
+      if (!disableResponsesAPI && (responsesAPIModels.has(model) || enabledSearch)) {
         return { ...rest, apiMode: 'responses', enabledSearch, model } as ChatStreamPayload;
       }
 
